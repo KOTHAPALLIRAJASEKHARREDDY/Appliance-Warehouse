@@ -1,8 +1,7 @@
-from gc import collect
-
 from flask import Flask, request, render_template, send_from_directory
 from pymongo import MongoClient
 import re
+from validators import validate_input
 
 app = Flask(__name__)
 
@@ -14,27 +13,12 @@ collection = db['users']
 def index():
     return render_template('SignUp.html')
 
+
 @app.route('/signup', methods=['POST'])
 def signup():
     print(request.form)
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
-    email = request.form['email']
-    phone = request.form['phone']
-    ssn = request.form['ssn']
-    password = request.form['password']
-
-    user_data = {
-        'firstname': firstname,
-        'lastname': lastname,
-        'email': email,
-        'phone': phone,
-        'ssn': ssn,
-        'password': password
-    }
-
+    user_data = validate_input()
     collection.insert_one(user_data)
-
     return "Account created successfully!"
 
 @app.route('/css/<path:filename>')
