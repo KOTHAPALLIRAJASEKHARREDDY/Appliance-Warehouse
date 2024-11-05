@@ -12,7 +12,7 @@ collection = db['users']
 
 @app.route('/')
 def index():
-    return render_template('signup.html')
+    return render_template('homepage.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -48,6 +48,10 @@ def send_css(filename):
 @app.route('/script/<path:filename>')
 def send_javascript(filename):
     return send_from_directory('./script/', filename)
+
+@app.route('/images/<path:filename>')
+def send_imagesfile(filename):
+    return send_from_directory('./images/', filename)
 
 @app.route('/dashboard')
 def user_dashboard():
