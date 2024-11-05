@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    flex-direction: column;
+    align-items: center;
+    background-color: #f3f3f3;
+}
+
+h1 {
+    color: #333;
+}
+
+
+
+footer {
+    margin-top: 20px;
+    color: #888;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f3f3f3;
+    margin: 0;
+}
+
+h1, p, h2, h3, label {
+    color: #333;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px;
+    gap: 30px;
+}
+
+.image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-section img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+}
+
+.details-section {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.order-btn:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    margin-top: 20px;
+    color: #888;
+}
+
+form label, form p, form input, form select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+form input, form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+..details-section div {
+    display: flex;
+    align-items:margin-left;  /* Vertically center the radio button and label */
+    justify-content: flex-start;  /* Align everything to the left (starting from the border) */
+    margin-bottom: 10px; /* Space between radio button options */
+}
+
+.details-section input[type="radio"] {
+    margin-right: 10px; /* Space between radio button and label */
+}
+
+/* Adjusting label styling */
+.details-section label {
+    margin-left: 5px; /* Space between radio button and label text */
+}
