@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appliance Warehouse</title>
+    <link rel="stylesheet" href="../css/signup.css"/>
+</head>
+<body>
+    <script src="../script/register.js"></script>
+    <div class="form-container">
+        <h1>Sign Up</h1>
+        <form id="signupForm" action="/signup" method="POST">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" required minlength="2" maxlength="100" pattern="[a-zA-Z\s]{2,}" placeholder="First Name"><br/><br/>
+
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" required minlength="2" maxlength="100" pattern="[a-zA-Z\s]{2,}" placeholder="Last Name"/><br/><br/>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Email"/><br/><br/>
+
+            <label for="phone">Phone No</label>
+            <input type="tel" id="phone" name="phone" required pattern="\d{3}-\d{3}-\d{4}" placeholder="Phone (XXX-XXX-XXXX)"/><br/><br/>
+
+            <label for="ssn">SSN</label>
+            <input type="text" id="ssn" name="ssn" required minlength="9" pattern="^\d{3}-\d{2}-\d{4}$" placeholder="SSN (XXX-XX-XXXX)"/><br/><br/>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required minlength="8" placeholder="Password"/>
+
+            <small>
+                Password must be at least 8 characters long, including:<br>
+                - One uppercase letter (A-Z)<br>
+                - One lowercase letter (a-z)<br>
+                - One digit (0-9)<br>
+                - One special character (e.g., !, @, #, $, etc.)
+            </small><br/><br/>
+
+            <label for="verifyPassword">Verify Password</label>
+            <input type="password" id="verifyPassword" name="verifyPassword" required minlength="8" placeholder="Verify Password"/>
+            <small>
+                Password must match the above password.
+            </small><br/><br/>
+
+            <input type="submit" value="Create Account"/>
+        </form>
+    </div>
+</body>
+</html>
