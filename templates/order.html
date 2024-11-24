@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now - Order Details</title>
+    <link rel="stylesheet" href="../css/order.css">
+</head>
+<body>
+    <script src="../script/order.js"></script>
+
+
+    <center>
+        <h1>Order Details</h1>
+    
+    </center>
+
+    <!-- Container for Image and Details -->
+    <div class="container">
+        <!-- Left Section: Image -->
+        <div class="image-section">
+            <img src="../images/image1.jpg" alt="Appliances Warehouse Storefront" width="400" height="300">
+        </div>
+
+        <!-- Right Section: Order Details -->
+        <div class="details-section">
+            <form action="#" method="post">
+                <!-- Appliance Name (Static) -->
+                <h3 class="bold">Appliance Name: Washing Machine</h3>
+
+                <!-- Features Section -->
+                <h3 class="bold">Features</h3>
+                <p id="features">
+                    - 7kg Capacity<br>
+                    - Top Load Design<br>
+                    - Energy Efficient<br>
+                    - 1200 RPM Spin Speed<br>
+                </p>
+
+                <!-- Price per Week -->
+                <label for="price" class="bold">Price</label>
+                <p>$25.00 </p>
+
+                <!-- Quantity -->
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required><br/>
+                <div class="delivery-type-container">
+                  <form>
+                            <label for="pickup">delivery-type:</label><br/>
+                            
+                            <!-- Delivery Type Selection (Radio Buttons) -->
+                            <div>
+                                <input type="radio" id="pickup" name="delivery-type" value="pickup"><br/>
+                                <label for="pickup">Pick-Up</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="delivery" name="delivery-type" value="delivery">
+                                <label for="delivery">Delivery</label>
+                            </div>
+                
+                            <!-- Pick-Up Date (Initially Hidden) -->
+                            <div id="pickup-date-container" style="display:none;">
+                                <label for="pickup-date">Select Pick-Up Date:</label>
+                                <input type="date" id="pickup-date" name="pickup-date">
+                            </div>
+                            <!-- Delivery Date (Initially Hidden) -->
+                <div id="delivery-date-container" style="display:none;">
+                    <label for="delivery-date">Select Delivery Date:</label>
+                    <input type="date" id="delivery-date" name="delivery-date">
+                </div>
+                            
+                        </form>
+                    </div>
+                 <!-- Place Order Button -->
+                <button type="submit" class="order-btn">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <center>
+            <p>&copy; 2023 Appliances Warehouse. All Rights Reserved.</p>
+        </center>
+    </footer>
+   
+
+</body>
+</html>
