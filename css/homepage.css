@@ -128,97 +128,121 @@ nav a:hover {
     box-shadow: 0 0 5px 2px rgba(0, 0, 255, 0.5);  /* Blue outline on focus for accessibility */
 }
 
-/* Columns */
-.columns-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 2em 5%;
-}
-
-.column {
-    flex: 1 1 30%;
-    background-color: #fff;
-    padding: 1em;
-    margin: 1em 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Available Products Section */
+//* General Layout */
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 2em 5%;
+    display: flex;               /* Use flexbox */
+    flex-direction: column;      /* Stack appliance cards vertically */
+    gap: 2em;                    /* Adds space between the appliance cards */
+    padding: 2em;
 }
 
+/* Appliance Individual Box */
+/* Appliance Container */
 .appliance {
     background-color: #fff;
     padding: 1.5em;
-    margin: 1em;
+    margin-left: auto;
+    margin-right: auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: 70%;                  /* Adjust width as needed */
+    position: relative;          /* Make sure the button is positioned relative to the container */
+    display: flex;
+    align-items: center;         /* Vertically center content inside the container */
+    justify-content: center;     /* Center the content horizontally */
+    flex-direction: row;         /* Layout items in a row (button on left, content on right) */
 }
 
-.appliance h2 {
+/* Order Now Button */
+.order-tag {
+    background-color: #27ae60;   /* Green background */
+    color: white;                 /* White text color */
+    padding: 0.8em 2em;           /* Add some padding for better click area */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;                 /* Remove default border */
+    border-radius: 5px;           /* Rounded corners */
+    cursor: pointer;             /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.2s ease;  /* Smooth transition */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: absolute;           /* Position the button absolutely */
+    right: 10px;                   /* Place it on the left side of the .appliance container */
+    top: 50%;                     /* Vertically center the button */
+    transform: translateY(-50%);  /* Adjust for exact vertical centering */
+}
+
+/* Hover Effect for Order Now Button */
+.order-tag:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-50%) translateX(2px) scale(1.05); /* Slight hover movement and scale */
+}
+
+.order-tag:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px 2px rgba(0, 123, 255, 0.7); /* Blue outline for accessibility */
+}
+
+.order-tag:active {
+    background-color: #1e7e34; /* Darker green when clicked */
+    transform: translate(2px, -50%) translateY(2px); /* Slight push-down effect when clicked */
+}
+.available-products {
+    text-align: center;           /* Center the section title */
+    margin-bottom: 2em;           /* Space below the section heading */
+}
+
+/* Heading for Available Products */
+.products-heading {
+    font-size: 2em;               /* Larger text size for the section heading */
+    font-weight: bold;
+    color: #2c3e50;               /* Match the color scheme */
+    text-transform: uppercase;    /* Make the heading uppercase */
+    margin-bottom: 1.5em; 
+    background-color: #218838;
+
+/* Appliance Content */
+.appliance h2, .appliance p {
+    text-align: center;           /* Center the text horizontally */
     font-size: 1.2em;
     color: #2c3e50;
+    margin-left: 100px;             /* Provide a little space between the text and button */
 }
 
 .appliance p {
-    font-size: 1em;
     color: #7f8c8d;
 }
 
-footer {
-    text-align: center;
-    padding: 1em 0;
-    background-color: #34495e;
-    color: white;
-}
-
 /* Responsive Styles */
-@media (max-width: 1200px) {
-    .columns-container {
-        flex-direction: column;
-    }
-
-    .column {
-        flex: 1 1 100%;
-        margin-bottom: 1em;
-    }
-
+@media (max-width: 1000px) {
     .container {
-        flex-direction: column;
+        flex-direction: row;   /* Stack the appliance cards vertically on medium screens */
         align-items: center;
     }
 
     .appliance {
-        width: 80%;
+        width: 80%;                /* Make appliance cards wider on smaller screens */
     }
 }
 
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    .carousel .slides {
-        flex-direction: column;
+    .container {
+        flex-direction: column;   /* Stack appliance cards vertically */
+        padding: 1em;
     }
 
     .appliance {
-        width: 90%;
+        width: 90%;                /* Make appliance cards even wider on smaller screens */
+    }
+
+    .order-tag {
+        width: 100%;               /* Expand the "Order Now" button to full width */
+        margin-top: 1em;           /* Add margin above button */
     }
 }
 
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.5em;
-    }
-
-    .product-nav h2 {
-        font-size: 1.2em;
     }
 
     .appliance h2 {
@@ -228,4 +252,87 @@ footer {
     .appliance p {
         font-size: 0.9em;
     }
+
+    .order-tag {
+        width: 100%;               /* Full-width button on small screens */
+        margin-top: 1.5em;         /* Add space above the button */
+        padding: 1em;              /* Make button more spacious */
+        font-size: 1.1rem;         /* Slightly larger text for readability */
+    }
+    /* General section styling */
+.columns-section {
+    padding: 2em;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+/* Heading styling */
+.section-heading {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 1.5em;
+}
+
+/* Flex container for columns */
+./* General section styling */
+.columns-section {
+    padding: 2em;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+/* Heading styling */
+.section-heading {
+    font-size: 2em;
+    color: #2c3e50;
+    margin-bottom: 1.5em;
+}
+
+/* Flex container for columns */
+.columns-container {
+    flex-direction: column;                   /* Use Flexbox to arrange columns horizontally */
+    justify-content: space-between;  /* Space out columns evenly */
+    gap: 2em;                        /* Add space between the columns */
+    flex-wrap: wrap;                 /* Allow columns to wrap if space is insufficient */
+    padding: 2em;
+}
+
+/* Styling for individual columns */
+.column {
+    background-color: #fff;
+    padding: 1.5em;
+    width: 30%;                       /* Set the width of each column */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);  /* Add subtle shadow */
+    border-radius: 8px;
+    text-align: left;                 /* Left-align text inside the columns */
+    box-sizing: border-box;           /* Ensure padding doesn't affect width */
+}
+
+/* Responsive Styles: Make the columns stack vertically on smaller screens */
+@media (max-width: 1200px) {
+    .columns-container {
+        flex-direction: column;       /* Ensure columns stay in a row, but with wrap */
+        align-items: center;       /* Center the columns */
+    }
+
+    .column {
+        width: 45%;                /* Slightly wider columns for medium screens */
+        margin-bottom: 1.5em;      /* Space between columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .columns-container {
+        flex-direction: column;    /* Stack columns vertically on very small screens */
+        align-items: center;       /* Center the columns */
+    }
+
+    .column {
+        width: 100%;               /* Make columns full-width on smaller screens */
+        margin-bottom: 1.5em;      /* Add space between stacked columns */
+    }
+}
+
+
+
 }

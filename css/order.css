@@ -8,7 +8,7 @@
 body {
     flex-direction: column;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #6211e4;
 }
 
 h1 {
@@ -32,7 +32,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #cdb599ff;
     margin: 0;
 }
 
@@ -53,7 +53,16 @@ h1, p, h2, h3, label {
     gap: 30px;
 }
 
-.image-section {
+.delivery-type-container {
+    padding-right: 40%;
+    flex-direction: column;
+}
+
+.delivery-date-container {
+    padding-left: 20%;
+}
+
+.image-section { 
     flex: 1;
     display: flex;
     justify-content: center;
@@ -68,7 +77,7 @@ h1, p, h2, h3, label {
 
 .details-section {
     flex: 2;
-    background-color: #fff;
+    background-color: #cdb599ff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -78,7 +87,7 @@ h1, p, h2, h3, label {
     display: block;
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #783937ff;
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -107,7 +116,7 @@ form input, form select {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-..details-section div {
+.details-section div {
     display: flex;
     align-items:margin-left;  /* Vertically center the radio button and label */
     justify-content: flex-start;  /* Align everything to the left (starting from the border) */
@@ -122,3 +131,16 @@ form input, form select {
 .details-section label {
     margin-left: 5px; /* Space between radio button and label text */
 }
+
+input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    margin-top: 10px;
+}
+
+input[type="radio"]:checked + label {
+    color: #2c3e50;
+}
+
