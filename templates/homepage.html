@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warehouse Appliances</title>
     <link rel="stylesheet" href="../css/homepage.css">
     <script src="../script/homepage.js" defer></script>
 </head>
 <body>
+    <header>
+      <h1>Warehouse Appliances</h1>
+    </header>
+    <nav>
+      <a href="#">Pay My Bill</a>
+      <a href="#">Appliances for Lease</a>
+      <a href="#">About Us</a>
+      <a href="login.html">Customer Login</a>
+    </nav>
 
-<header>
-    <h1>Warehouse Appliances</h1>
-</header>
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide">
+          <img src="/images/image7.jpg" alt="Warehouse Forklift" />
+        </div>
+        <div class="slide">
+          <img src="../images/image8.jpg" alt="Warehouse Pallet Jack" />
+        </div>
+        <div class="slide">
+          <img src="../images/image4.jpg" alt="Warehouse Conveyor Belt" />
+        </div>
+        <div class="slide">
+          <img src="../images/image5.jpg" alt="Warehouse Equipment" />
+        </div>
+      </div>
 
-<nav>
-    <a href="#">Pay My Bill</a>
-    <a href="#">Appliances for Lease</a>
-    <a href="#">About Us</a>
-    <a href="login.html">Customer Login</a>
-</nav>
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
 
-<div class="carousel">
-    <div class="slides">
-        <div class="slide"><img src="../images/image7.jpg" alt="Warehouse Forklift"></div>
-        <div class="slide"><img src="../images/image8.jpg" alt="Warehouse Pallet Jack"></div>
-        <div class="slide"><img src="../images/image4.jpg" alt="Warehouse Conveyor Belt"></div>
-        <div class="slide"><img src="../images/image5.jpg" alt="Warehouse Equipment"></div>
-    </div>
-
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-
-    <!-- Dots for Navigation -->
-    <div class="dots-container">
+      <!-- Dots for Navigation -->
+      <div class="dots-container">
         <span class="dot" onclick="currentSlide(0)"></span>
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
     </div>
-</div>
 
-<div class="columns-container">
-    <div class="column">Column 1 Content</div>
-    <div class="column">Column 2 Content</div>
-    <div class="column">Column 3 Content</div>
-</div>
+    <div class="columns-container">
+      <div class="column">Column 1 Content</div>
+      <div class="column">Column 2 Content</div>
+      <div class="column">Column 3 Content</div>
+    </div>
 
-<!-- Navigation bar for Available Products -->
-<div class="product-nav">
-    <h2>Available Products</h2>
-</div>
+    <!-- Navigation bar for Available Products -->
+    <div class="product-nav">
+      <h2>Available Products</h2>
+    </div>
 
 <div class="container">
     {% for p_data in product_data %}
@@ -69,13 +75,12 @@
                 <button onclick="on_order('{{ p_data['appliance_id'] }}')">Add to cart</button>
             </div>
         </div>
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
-<footer>
-    <p>&copy; 2024 Warehouse Solutions Inc.</p>
-</footer>
-
-</body>
+    <footer>
+      <p>&copy; 2024 Warehouse Solutions Inc.</p>
+    </footer>
+  </body>
 </html>

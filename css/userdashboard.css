@@ -1,196 +1,221 @@
 /* Reset and box-sizing */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
 }
 
 /* General body styling */
 body {
-    display: flex;
-    height: 100vh;
-    background-color: #f0f2f5;
+  display: flex;
+  height: 100vh;
+  background-color: #f0f2f5;
 }
 
 .main-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header with dark blue background */
 .header {
-    background-color: #003366;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: relative;
+  background-color: #003366;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
 }
 
 /* Flex container for header content */
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Increased font size for the Welcome message */
 .header h2 {
-    font-size: 36px;
-    margin: 0;
+  font-size: 36px;
+  margin: 0;
 }
 
 /* Menu dropdown styling */
 .menu-dropdown {
-    position: relative;
-    margin-left: 20px;
+  position: relative;
+  margin-left: 20px;
 }
 
 .menu-btn {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .menu-icon {
-    font-size: 24px;
-    margin-right: 8px;
+  font-size: 24px;
+  margin-right: 8px;
 }
 
 .menu-dropdown ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 8px;
-    z-index: 1;
-    width: 200px; /* Ensure dropdown has a fixed width for alignment */
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  z-index: 1;
+  width: 200px; /* Ensure dropdown has a fixed width for alignment */
 }
 
 .menu-dropdown ul li {
-    padding: 10px 20px; /* Add padding for alignment */
-    white-space: nowrap;
+  padding: 10px 20px; /* Add padding for alignment */
+  white-space: nowrap;
 }
 
 .menu-dropdown ul li a {
-    color: #333;
-    text-decoration: none;
-    display: block;
-    text-align: left; /* Align all menu items to the left */
+  color: #333;
+  text-decoration: none;
+  display: block;
+  text-align: left; /* Align all menu items to the left */
 }
 
 .menu-dropdown ul li:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 /* Show dropdown on hover */
 .menu-dropdown:hover ul {
-    display: block;
+  display: block;
 }
 
 /* Profile icon and dropdown */
 .profile-menu {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 
 /* Profile icon styling */
 .profile-icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #007bff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-    text-transform: uppercase;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  text-transform: uppercase;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
 }
 
 /* Profile letter inside icon */
 #profile-letter {
-    font-weight: bold;
-    font-size: 24px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 /* Dropdown menu positioning and visibility */
 .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 50px; /* Adjust dropdown position */
-    right: 0;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 150px;
-    z-index: 1;
+  display: none;
+  position: absolute;
+  top: 50px; /* Adjust dropdown position */
+  right: 0;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 150px;
+  z-index: 1;
 }
 
 /* Style for dropdown items */
 .dropdown-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .dropdown-menu ul li {
-    padding: 10px 15px;
-    text-align: left;
+  padding: 10px 15px;
+  text-align: left;
 }
 
 .dropdown-menu ul li a {
-    text-decoration: none;
-    color: #333;
-    display: block;
+  text-decoration: none;
+  color: #333;
+  display: block;
 }
 
 .dropdown-menu ul li:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 /* Fix for hover on profile icon to show dropdown */
 .profile-icon:hover + .dropdown-menu,
 .profile-menu:hover .dropdown-menu {
-    display: block;
+  display: block;
 }
 
 /* Content container with white background */
 .content-container {
-    background-color: white;
-    padding: 40px;
-    flex-grow: 1;
-    text-align: center;
+  background-color: white;
+  padding: 40px;
+  flex-grow: 1;
+  text-align: center;
 }
 
 /* Cart section with icon */
 .content h3 {
-    font-size: 28px;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+  font-size: 28px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .fas.fa-shopping-cart {
-    font-size: 40px;
-    color: #007bff;
+  font-size: 40px;
+  color: #007bff;
 }
 
 /* No items in cart symbol */
 .no-items-icon {
-    font-size: 50px;
-    color: #007bff;
-    margin-top: 20px;
+  font-size: 50px;
+  color: #007bff;
+  margin-top: 20px;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 48%;
+}
+
+.rentals-section {
+  margin-top: 10px;
+}
+
+.rental-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }

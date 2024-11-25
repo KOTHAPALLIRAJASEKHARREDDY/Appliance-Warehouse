@@ -1,53 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Dashboard</title>
-    <link rel="stylesheet" href="./css/userdashboard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="./css/userdashboard.css" />
+  </head>
+  <body>
     <div class="main-content">
-        <header class="header">
-            <div class="header-container">
-                <!-- Menu Dropdown -->
-                <div class="menu-dropdown">
-                    <a href="#" class="menu-btn">
-                        <span class="menu-icon">☰</span> Menu
-                    </a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Payment Bill</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Maintenance Request</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
+      <header class="header">
+        <div class="header-container">
+          <!-- Menu Dropdown -->
+          <div class="menu-dropdown">
+            <a href="#" class="menu-btn">
+              <span class="menu-icon">☰</span> Menu
+            </a>
+            <ul class="dropdown-content">
+              <li><a href="#">Payment Bill</a></li>
+              <li><a href="#">Order Status</a></li>
+              <li><a href="#">Maintenance Request</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
 
-                <h2>Welcome, {{ name }}</h2>
+          <h2>Welcome, <span id="user-name">User</span></h2>
 
-                <!-- Profile menu and dropdown -->
-                <div class="profile-menu">
-                    <div class="profile-icon" id="profile-icon">
-                        <span id="profile-letter">U</span>
-                    </div>
-                    <input type="file" id="profile-upload" style="display: none;" accept="image/*">
-                    <div class="dropdown-menu">
-                        <ul>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="/logout">Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
+          <!-- Profile menu and dropdown -->
+          <div class="profile-menu">
+            <div class="profile-icon" id="profile-icon">
+              <span id="profile-letter">U</span>
             </div>
-        </header>
-
-        <!-- White Content Section without line -->
-        <div class="content-container">
-            <section class="content">
-                <h3><i class="fas fa-shopping-cart"></i> No items left in your cart</h3>
-                <p class="no-items-icon">🛒</p> <!-- New symbol added for no items left -->
-            </section>
+            <input
+              type="file"
+              id="profile-upload"
+              style="display: none"
+              accept="image/*"
+            />
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
+      </header>
+
+      <div class="content-container">
+        <div id="history">
+          <section class="dashboard-content">
+            <div class="card">
+              <h3>Ongoing Rentals</h3>
+              <div id="ongoing-rentals" class="rentals-section">
+                <!-- Ongoing rentals will be populated here -->
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>Rental History</h3>
+              <div id="rental-history" class="rentals-section">
+                <!-- Rental history will be populated here -->
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- White Content Section without line -->
+        <!-- <div class="content-container"> -->
+        <section class="content" id="no-rentals">
+          <h3>
+            <i class="fas fa-shopping-cart"></i> No items left in your cart
+          </h3>
+          <p class="no-items-icon">🛒</p>
+          <!-- New symbol added for no items left -->
+        </section>
+      </div>
     </div>
 
     <!-- FontAwesome for cart icon -->
@@ -55,5 +81,5 @@
 
     <!-- JavaScript for Profile Upload -->
     <script src="../script/userdashboard.js"></script>
-</body>
+  </body>
 </html>
