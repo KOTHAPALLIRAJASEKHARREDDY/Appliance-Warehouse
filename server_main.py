@@ -64,6 +64,11 @@ def user_dashboard():
 def admin():
     pass
 
+
+@app.route('/order')
+def order_page():
+    return render_template('order.html', item_Details = DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
+
 @app.route('/css/<path:filename>')
 def send_css(filename):
     return send_from_directory('./css/', filename)

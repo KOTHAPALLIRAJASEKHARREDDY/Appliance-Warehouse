@@ -21,4 +21,9 @@ class DbManager:
         collection = DbManager.db['appliances']
         return collection
 
+    @staticmethod
+    def get_Appliances_Details_WithId(appliance_id):
+        collection = DbManager.get_appliances_collection()
+        return collection.find_one({'appliance_id': appliance_id})
+
 
