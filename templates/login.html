@@ -1,35 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login Page</title>
-  <link rel="stylesheet" type="text/css" href="../css/login.css">
-</head>
-<body>
-<div class="container">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-              <p>{{msg}}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <h2>Login</h2>
-    <form action="/login" method="post">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" placeholder="Enter Username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" placeholder="Enter Password" required>
-      </div>
-      <a href="#" id="forgot_pass">Forgot password?</a>
-      <button type="submit" name="button">Login</button>
-      <p id="par">Don't have an account? <span><a href="./signup">Create new account</a></span></p>
-    </form>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="../css/login.css" />
+    <script src="../script/login.js" defer></script>
+  </head>
+  <body>
+    <!-- <div class="container">
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for msg
+      in messages %}
+      <p>{{msg}}</p>
+      {% endfor %} {% endif %} {% endwith %}
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+        <a href="#" id="forgot_pass">Forgot password?</a>
+        <button type="submit" name="button">Login</button>
+        <p id="par">
+          Don't have an account?
+          <span><a href="./signup">Create new account</a></span>
+        </p>
+      </form>
+      <p id="message"></p>
+    </div> -->
+
+    <div class="container">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter Username"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Password"
+            required
+          />
+        </div>
+        <a href="#" id="forgot_pass">Forgot password?</a>
+        <button type="submit" name="button">Login</button>
+        <p id="par">
+          Don't have an account?
+          <span><a href="./signup">Create new account</a></span>
+        </p>
+      </form>
+      <p id="message" style="text-align: center; color: red"></p>
+    </div>
+  </body>
 </html>
