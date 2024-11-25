@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warehouse Appliances</title>
     <link rel="stylesheet" href="../css/homepage.css">
-    <script src="../script/slideshow.js" defer></script>
+    <script src="../script/homepage.js" defer></script>
 </head>
 <body>
 
@@ -17,7 +17,7 @@
     <a href="#">Pay My Bill</a>
     <a href="#">Appliances for Lease</a>
     <a href="#">About Us</a>
-    <a href="#">Customer Login</a>
+    <a href="login.html">Customer Login</a>
 </nav>
 
 <div class="carousel">
@@ -28,7 +28,6 @@
         <div class="slide"><img src="../images/image5.jpg" alt="Warehouse Equipment"></div>
     </div>
 
-    <!-- Buttons for Next and Previous -->
     <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
     <button class="next" onclick="moveSlide(1)">&#10095;</button>
 
@@ -41,57 +40,42 @@
     </div>
 </div>
 
-<section class="columns-section">
-    <h2 class="section-heading">Columns Example</h2>
-    <div class="columns-container">
-        <!-- Column 1 -->
-        <div class="column">
-            <h3>Column 1 Content</h3>
-            <p>This is some content inside column 1.</p>
-            <p>Additional content for column 1 goes here.</p>
-        </div>
-        <!-- Column 2 -->
-        <div class="column">
-            <h3>Column 2 Content</h3>
-            <p>This is some content inside column 2.</p>
-            <p>Additional content for column 2 goes here.</p>
-        </div>
-        <!-- Column 3 -->
-        <div class="column">
-            <h3>Column 3 Content</h3>
-            <p>This is some content inside column 3.</p>
-            <p>Additional content for column 3 goes here.</p>
-        </div>
-    </div>
-</section>
-
-
+<div class="columns-container">
+    <div class="column">Column 1 Content</div>
+    <div class="column">Column 2 Content</div>
+    <div class="column">Column 3 Content</div>
+</div>
 
 <!-- Navigation bar for Available Products -->
-<section class="available-products">
-    <h2 class="products-heading">Available Products</h2>
-    <div class="container">
-        <!-- Appliance Card 1 -->
-        <div class="appliance">
-            <button class="order-tag">Order Now</button>
-            <h2>Appliance 1</h2>
-            <p>Some description of Appliance 1.</p>
-        </div>
-        <!-- Appliance Card 2 -->
-        <div class="appliance">
-            <button class="order-tag">Order Now</button>
-            <h2>Appliance 2</h2>
-            <p>Some description of Appliance 2.</p>
-        </div>
-        <!-- Appliance Card 3 -->
-        <div class="appliance">
-            <button class="order-tag">Order Now</button>
-            <h2>Appliance 3</h2>
-            <p>Some description of Appliance 3.</p>
+<div class="product-nav">
+    <h2>Available Products</h2>
+</div>
+
+<div class="container">
+    {% for p_data in product_data %}
+    <div class="appliance">
+        <img style="width: 300px; height: 500px;" src="{{ p_data['image_url'] }}" alt="{{ p_data['type'] }}"><br>
+        <div class="appliance-text">
+            <h2>{{ p_data['brand'] }} {{ p_data['type'] }}</h2>
+            <p>Model : {{ p_data['model'] }}</p>
+            <p>Condition : {{ p_data['condition'] }}</p>
+            <p>Features : {% for feature in range(3) %}
+            {{ p_data['features'][feature] }} {% if feature == 2 %} . {% else %} , {% endif %}
+            {% endfor %}</p>
+            <p>Price: {{ p_data['rental_rate'] }}</p>
+            <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
+            <div class="appliance-button">
+                <button onclick="on_order('{{ p_data['appliance_id'] }}')">Order now</button>
+                <button onclick="on_order('{{ p_data['appliance_id'] }}')">Add to cart</button>
+            </div>
         </div>
     </div>
-</section>
+    {% endfor %}
+</div>
 
+<footer>
+    <p>&copy; 2024 Warehouse Solutions Inc.</p>
+</footer>
 
 </body>
 </html>

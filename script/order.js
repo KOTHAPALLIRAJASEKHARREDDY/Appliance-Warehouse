@@ -57,3 +57,26 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize visibility based on the current radio button state
     togglePickupDateVisibility();
 });
+
+
+function calculate_price(price, deposit) {
+    let quantity = parseInt(document.getElementById("quantity").value);
+
+    let updated_price = 0;
+    let updated_deposit = 0;
+    if(quantity === 1)
+    {
+        document.getElementById("price").innerHTML = "$" + price.toFixed(2);
+        document.getElementById("deposit").innerHTML = "$" + deposit.toFixed(2);
+    }
+    else if(quantity > 1 && quantity <= 10)
+    {
+        updated_price = quantity * price;
+        updated_deposit = deposit * quantity;
+        document.getElementById("price").innerHTML = "$" + updated_price.toFixed(2);
+        document.getElementById("deposit").innerHTML = "$" + updated_deposit.toFixed(2);
+    }
+    else {
+        alert("please note that quantity is must be between 0 and 10");
+    }
+}

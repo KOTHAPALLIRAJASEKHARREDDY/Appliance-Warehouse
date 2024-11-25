@@ -40,3 +40,22 @@ showSlides(slideIndex);
 setInterval(function() {
     moveSlide(1); // Move to the next slide every 30 seconds
 }, 30000);
+
+function on_order(p_id)
+{
+     const url = '/order';
+     const params = new URLSearchParams({
+         product_id : p_id
+     });
+     fetch(`${url}?${params.toString()}`)
+         .then(response=>{
+             if(response.ok)
+             {
+                 window.location.href = response.url;
+             }
+             else {
+                 console.error('Issue with redirection.');
+             }
+         })
+            .catch(console.error);
+}

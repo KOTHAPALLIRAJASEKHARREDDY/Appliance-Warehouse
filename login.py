@@ -15,7 +15,6 @@ def user_login(collection):
             isLogin = check_for_user_credentials(username, password, collection)
             if isLogin:
                 print("redirecting to dashboard")
-                #return redirect(url_for('user_dashboard'))
                 return "true"
             else:
                 return "false"
@@ -24,11 +23,9 @@ def user_login(collection):
 
 
 def check_for_user_credentials(username, password, collection):
-    print('Enterd check_for_user_credentials')
     user = collection.find_one({'email': username})
     if user and user['password'] == password:
         print("returning true")
         return True
-    print("returning flase")
     return False
 
