@@ -1,0 +1,78 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container for confirmation */
+.confirmation-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+/* Order details section */
+.order-details {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.order-details p {
+    margin-bottom: 10px;
+}
+
+/* Details section (Pickup/Delivery) */
+.details-section {
+    background-color: #f0f8ff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid #b0c4de;
+}
+
+.details-section h3 {
+    color: #008cba;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+    display: none; /* Initially hidden */
+}
+
+button:hover {
+    background-color: #45a049;
+}
