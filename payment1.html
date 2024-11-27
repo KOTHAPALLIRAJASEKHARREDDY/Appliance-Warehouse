@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .payment-container {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .payment-container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .payment-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .payment-options button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .payment-options button.active {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .pay-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .powered-by {
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h2>Payment Page</h2>
+
+    
+ 
+    
+    <div class="payment-options active">
+        <div style="float: left;width:50%"><strong>Total Amount to be Paid:</strong></div>
+        <div style="float: right;width:50%" align="right"><span class="total-amount">$100</span></div>
+    </div>
+
+    <p><strong>Fill up your personal information</strong></p>
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card_number" required>
+        </div>
+        <div class="form-group">
+            <label for="expiration-date">Expiration Date</label>
+            <input type="text" id="expiration-date" name="expiration_date" placeholder="MM/YY" required>
+        </div>
+        <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" name="cvc" required>
+        </div>
+        <div class="form-group">
+            <label for="zip">ZIP</label>
+            <input type="text" id="zip" name="zip" required>
+        </div>
+        <button type="submit" class="pay-button">PAY $100 ONE-TIME</button>
+    </form>
+
+    <p class="powered-by">Powered by Stripe • VISA</p>
+</div>
+
+</body>
+</html>
