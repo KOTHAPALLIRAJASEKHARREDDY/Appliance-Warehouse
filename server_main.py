@@ -122,13 +122,19 @@ def admin_dashboard():
 def place_order():
     is_success = DbManager.add_order_to_db(request.args.get('product_id'), session.get('email'))
     if is_success:
-        return "done"
+        return redirect('/conform?product_id=' + request.args.get('product_id'))
     else:
         return "failed"
+
+@app.route('/conform')
+def conform():
+    return render_template('conformation.html')
+
 
 @app.route('/order')
 def order_page():
     return render_template('order.html', item_Details = DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
+
 
 @app.route('/css/<path:filename>')
 def send_css(filename):
