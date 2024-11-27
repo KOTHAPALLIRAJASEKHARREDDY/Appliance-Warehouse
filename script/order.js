@@ -38,15 +38,19 @@ document.addEventListener('DOMContentLoaded', function () {
         if (pickupRadio.checked) {
             pickupDateContainer.style.display = 'block';
             deliveryDateContainer.style.display = 'none'; // Hide delivery date
-        }
-        // Show the delivery date if "Delivery" is selected
-        else if (deliveryRadio.checked) {
+            deliveryDateInput.removeAttribute('required'); // Remove 'required' from delivery date when hidden
+            pickupDateInput.setAttribute('required', 'true');
+        } else if (deliveryRadio.checked) {
             deliveryDateContainer.style.display = 'block';
             pickupDateContainer.style.display = 'none'; // Hide pick-up date
+            pickupDateInput.removeAttribute('required'); // Remove 'required' from pickup date when hidden
+            deliveryDateInput.setAttribute('required', 'true');
         } else {
             // Hide both if neither is selected (initial state)
             pickupDateContainer.style.display = 'none';
             deliveryDateContainer.style.display = 'none';
+            pickupDateInput.removeAttribute('required'); // Remove 'required' from pickup date
+            deliveryDateInput.removeAttribute('required');
         }
     }
 
@@ -56,27 +60,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize visibility based on the current radio button state
     togglePickupDateVisibility();
+
+    deliveryRadio.addEventListener('change', function() {
+        if (deliveryRadio.checked) {
+            deliveryDateInput.setAttribute('required', 'true');
+        } else {
+            deliveryDateInput.removeAttribute('required');
+        }
+    });
+
+    // Form validation before submission (Optional: you can add more checks if needed)
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (event) {
+        // Ensure the form is valid before submitting
+        if (pickupRadio.checked && !pickupDateInput.value) {
+            event.preventDefault(); // Prevent form submission
+            alert('Please select a valid pick-up date.');
+        } else if (deliveryRadio.checked && !deliveryDateInput.value) {
+            event.preventDefault(); // Prevent form submission
+            if (deliveryDateInput.style.display !== 'none' && !deliveryDateInput.value) {
+                event.preventDefault();
+                alert('Please select a valid delivery date.');
+            }
+        }
+    });
 });
 
-
+// Price calculation function
 function calculate_price(price, deposit) {
     let quantity = parseInt(document.getElementById("quantity").value);
+    console.log(quantity);console.log(price);console.log(deposit);
 
     let updated_price = 0;
     let updated_deposit = 0;
-    if(quantity === 1)
-    {
-        document.getElementById("price").innerHTML = "$" + price.toFixed(2);
-        document.getElementById("deposit").innerHTML = "$" + deposit.toFixed(2);
-    }
-    else if(quantity > 1 && quantity <= 10)
-    {
+
+    if (quantity === 1) {
+        updated_price = price;
+        updated_deposit = deposit;
+    } else if (quantity > 1 && quantity <= 10) {
         updated_price = quantity * price;
         updated_deposit = deposit * quantity;
-        document.getElementById("price").innerHTML = "$" + updated_price.toFixed(2);
-        document.getElementById("deposit").innerHTML = "$" + updated_deposit.toFixed(2);
+    } else {
+        alert("Please note that quantity must be between 1 and 10");
+        return;
     }
-    else {
-        alert("please note that quantity is must be between 0 and 10");
-    }
+
+    // Update the total price and deposit display
+    document.getElementById("price").textContent = "$" + updated_price.toFixed(2);
+    document.getElementById("deposit").textContent = "$" + updated_deposit.toFixed(2);
+    document.getElementById("total-price").textContent = "Total amount is: $" + (updated_price + updated_deposit).toFixed(2);
 }

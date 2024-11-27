@@ -5,6 +5,7 @@ from flask import abort, request
 def validate_input():
     firstname = request.form.get('firstname', '').strip()
     lastname = request.form.get('lastname', '').strip()
+    address = request.form.get('address', '').strip()
     email = request.form.get('email', '').strip()
     phone = request.form.get('phone', '').strip()
     ssn = request.form.get('ssn', '').strip()
@@ -15,6 +16,9 @@ def validate_input():
 
     if not re.match("^[A-Za-z '-]+$", firstname) or not re.match("^[A-Za-z '-]+$", lastname):
         abort(400, "Firstname and Lastname can only contain letters, spaces, and hyphens.")
+
+    if not address:
+        abort(400, "Address is required.")
 
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if not re.match(email_regex, email):
@@ -34,6 +38,7 @@ def validate_input():
     return {
         'firstname': firstname,
         'lastname': lastname,
+        'address': address,
         'email': email,
         'phone': phone,
         'ssn': ssn,

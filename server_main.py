@@ -118,9 +118,13 @@ def admin_dashboard():
         return redirect(url_for('login'))
     return render_template('admindashboard.html')
 
-
-def admin():
-    pass
+@app.route('/placeorder', methods=['POST'])
+def place_order():
+    is_success = DbManager.add_order_to_db(request.args.get('product_id'), session.get('email'))
+    if is_success:
+        return "done"
+    else:
+        return "failed"
 
 @app.route('/order')
 def order_page():

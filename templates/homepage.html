@@ -71,7 +71,7 @@
             <p>Price: {{ p_data['rental_rate'] }}</p>
             <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
             <div class="appliance-button">
-                <button onclick="on_order('{{ p_data['appliance_id'] }}')">Order now</button>
+                <button onclick="on_order('{{ p_data['_id'] }}')">Order now</button>
                 <button onclick="on_order('{{ p_data['appliance_id'] }}')">Add to cart</button>
             </div>
         </div>

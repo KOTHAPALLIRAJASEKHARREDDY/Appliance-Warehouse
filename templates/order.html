@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Now - Order Details</title>
     <link rel="stylesheet" href="../css/order.css">
+    <script src="../script/order.js" defer></script>
 </head>
 <body>
-    <script src="../script/order.js"></script>
-
-
     <center>
         <h1>Order Details</h1>
-    
     </center>
 
     <!-- Container for Image and Details -->
@@ -24,7 +21,7 @@
 
         <!-- Right Section: Order Details -->
         <div class="details-section">
-            <form action="#" method="post">
+            <form action="/placeorder?product_id={{ item_Details['_id'] }}" method="post">
                 <!-- Appliance Name (Static) -->
                 <h3 class="bold">Appliance Name: {{ item_Details['brand'] }} {{ item_Details['type'] }}</h3><br>
 
@@ -45,34 +42,49 @@
                 <!-- Quantity -->
                 <label for="quantity" class="bold">Quantity</label>
                 <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" onchange="calculate_price({{ item_Details['rental_rate'] }}, {{ item_Details['deposit_amount'] }})" oninput="calculate_price({{ item_Details['rental_rate'] }}, {{ item_Details['deposit_amount'] }})" required><br/>
-                <div class="delivery-type-container">
-                  <form>
-                            <label for="pickup" class="bold">Delivery-type:</label><br/>
-                            
-                            <!-- Delivery Type Selection (Radio Buttons) -->
-                            <div>
-                                <input type="radio" id="pickup" name="delivery-type" value="pickup"><br/>
-                                <label for="pickup">Pick-Up</label>
-                            </div>
-                            <div>
-                                <input type="radio" id="delivery" name="delivery-type" value="delivery">
-                                <label for="delivery">Delivery</label>
-                            </div>
-                
-                            <!-- Pick-Up Date (Initially Hidden) -->
-                            <div id="pickup-date-container" style="display:none;">
-                                <label for="pickup-date">Select Pick-Up Date:</label>
-                                <input type="date" id="pickup-date" name="pickup-date">
-                            </div>
-                            <!-- Delivery Date (Initially Hidden) -->
-                <div id="delivery-date-container" style="display:none;">
-                    <label for="delivery-date">Select Delivery Date:</label>
-                    <input type="date" id="delivery-date" name="delivery-date">
-                </div>
-                            
-                        </form>
+
+                <div class="insurance-container">
+                    <label for="insurance" class="bold">Do you need insurance?</label><br/>
+                    <!-- Insurance Option (Radio Buttons) -->
+                    <div>
+                        <input type="radio" id="insurance-yes" name="insurance" value="yes" required>
+                        <label for="insurance-yes">Yes</label>
                     </div>
-                 <!-- Place Order Button -->
+                    <div>
+                        <input type="radio" id="insurance-no" name="insurance" value="no" required>
+                        <label for="insurance-no">No</label>
+                    </div>
+                </div>
+
+                <div class="delivery-type-container">
+                    <label for="pickup" class="bold">Delivery-type:</label><br/>
+
+                    <!-- Delivery Type Selection (Radio Buttons) -->
+                    <div>
+                        <input type="radio" id="pickup" name="delivery-type" value="pickup" required><br/>
+                        <label for="pickup">Pick-Up</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="delivery" name="delivery-type" value="delivery" required>
+                        <label for="delivery">Delivery</label>
+                    </div>
+
+                    <!-- Pick-Up Date (Initially Hidden) -->
+                    <div id="pickup-date-container" style="display:none;">
+                        <label for="pickup-date">Select Pick-Up Date:</label>
+                        <input type="date" id="pickup-date" name="pickup-date" required>
+                    </div>
+                    <!-- Delivery Date (Initially Hidden) -->
+                    <div id="delivery-date-container" style="display:none;">
+                        <label for="delivery-date">Select Delivery Date:</label>
+                        <input type="date" id="delivery-date" name="delivery-date" required>
+                    </div>
+                </div>
+
+                <!-- Total Price Display (For Dynamic Calculation) -->
+                <div id="total-price"></div>
+
+                <!-- Place Order Button -->
                 <button type="submit" class="order-btn">Place Order</button>
             </form>
         </div>
@@ -84,7 +96,5 @@
             <p>&copy; 2023 Appliances Warehouse. All Rights Reserved.</p>
         </center>
     </footer>
-   
-
 </body>
 </html>
