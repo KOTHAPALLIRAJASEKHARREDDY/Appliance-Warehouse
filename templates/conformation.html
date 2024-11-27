@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="../css/conformation.css">">
+</head>
+<body>
+    <script src="../script/conformation.js"></script>
+
+    <div class="confirmation-container">
+        <h1>Order Confirmed!</h1>
+        <p>Your order has been successfully placed. Below are the details:</p>
+
+        <!-- Order Details Section -->
+        <div class="order-details">
+            <p><strong>Order ID:</strong> <span id="order-id">#12345</span></p>
+            <p><strong>Customer Name:</strong> <span id="customer-name">John Doe</span></p>
+            <p><strong>Product:</strong> <span id="product-name">Wireless Headphones</span></p>
+            <p><strong>Quantity:</strong> <span id="product-quantity">2</span></p>
+            <p><strong>Total Price:</strong> $<span id="total-price">150.00</span></p>
+        </div>
+
+        <!-- Pickup Details (Initially hidden) -->
+        <div id="pickup-details" class="details-section" style="display: none;">
+            <h3>Pickup Details:</h3>
+            <p><strong>Pickup Location:</strong> <span id="pickup-location">Tech Store - Downtown</span></p>
+            <p><strong>Pickup Time:</strong> <span id="pickup-time">November 27, 2024, between 10:00 AM - 5:00 PM</span></p>
+            
+        </div>
+
+        <!-- Delivery Details (Initially hidden) -->
+        <div id="delivery-details" class="details-section" style="display: none;">
+            <h3>Delivery Details:</h3>
+            <p><strong>Delivery Address:</strong> <span id="delivery-address">1234 Elm Street, Springfield, IL 62701</span></p>
+            <p><strong>Estimated Delivery Date:</strong> November 30, 2024</p>
+            
+        </div>
+
+        <!-- Back to Homepage Button -->
+        <button id="back-home-btn" onclick="redirectToHome()">Back to Homepage</button>
+    </div>
+
+   
+</body>
+</html>
