@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="../css/payment_page.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<script src="../script/payment_page.js"></script>
+
+<div class="payment-container">
+    <div class="payment-header">
+        <h2>Secure Payment</h2>
+        <p>Complete your payment to confirm your purchase.</p>
+    </div>
+
+    <div class="payment-options">
+        <div class="total-amount-container">
+            <span>Total Amount:</span>
+            <span class="total-amount">${{ order_data['total_amount'] }}.00</span>
+        </div>
+    </div>
+
+    <form id="payment-form" action="/payment" method="POST">
+        <h3>Payment Details</h3>
+
+        <!-- Card Type Section -->
+        <div class="form-group">
+            <label>Card Type</label>
+            <fieldset class="card-type-container">
+                <label>
+                    <input type="radio" name="card_type" value="credit" checked> Credit Card
+                </label>
+                <label>
+                    <input type="radio" name="card_type" value="debit"> Debit Card
+                </label>
+            </fieldset>
+        </div>
+
+        <!-- Name on Card Section -->
+        <div class="form-group">
+            <label for="name-on-card">Name on Card</label>
+            <input type="text" id="name-on-card" name="name_on_card" required>
+        </div>
+
+        <!-- Card Number Section -->
+        <div class="form-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card_number" required oninput="formatCardNumber(event)" minlength="19" maxlength="19">
+        </div>
+
+        <!-- Expiration Date Section -->
+        <div class="form-group">
+            <label for="expiration-date">Expiration Date</label>
+            <input type="text" id="expiration-date" name="expiration_date" placeholder="MM/YY" required
+                   minlength="5" maxlength="5" pattern="\d{2}/\d{2}" title="Please enter expiration date in MM/YY format"
+                   oninput="formatExpirationDate(event)">
+        </div>
+
+        <!-- CVC Section -->
+        <div class="form-group">
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" name="cvc" required minlength="3" maxlength="3" pattern="\d{3}" title="Please enter 3 digits CVC">
+        </div>
+
+        <!-- ZIP Code Section -->
+        <div class="form-group">
+            <label for="zip">ZIP Code</label>
+            <input type="text" id="zip" name="zip" required minlength="5" maxlength="5" pattern="\d{5}" title="Please enter a valid 5-digit ZIP code">
+        </div>
+
+        <button type="submit" class="pay-button">PAY NOW</button>
+    </form>
+
+    <p class="powered-by">Powered by Stripe • VISA</p>
+</div>
+
+</body>
+</html>

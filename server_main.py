@@ -1,4 +1,5 @@
-from django.contrib.admin import display
+import json
+
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for, flash, jsonify, session
 from dbManager import DbManager
 from validators import validate_input
@@ -125,9 +126,27 @@ def place_order():
     if is_success:
         #return redirect('/conform?product_id=' + request.args.get('product_id'))
         print(f"the data {display_info}")
-        return render_template('conformation.html', display_data=display_info)
+        #return render_template('conformation.html', display_data=display_info)
+        display_info['order_id'] = str(display_info['order_id'])
+        session['order_info'] = display_info
+        return redirect(url_for('payment'))
     else:
         return "failed"
+
+@app.route('/payment', methods=['GET','POST'])
+def payment():
+    data = session.get('order_info')
+    if data:
+        session.pop('order_info', None)
+    if request.method == 'GET':
+        return render_template('payment.html', order_data=data)
+    else:
+        is_success = DbManager.add_payment_details_to_db(data)
+        if is_success:
+            print(f"the data {data}")
+            return render_template('conformation.html', display_data=data)
+        else:
+            return "Issue Happened try again later"
 
 @app.route('/conform')
 def conform():

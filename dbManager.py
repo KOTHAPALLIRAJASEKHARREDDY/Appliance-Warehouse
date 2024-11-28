@@ -2,11 +2,14 @@ from pymongo import MongoClient
 from flask import request
 from bson import ObjectId
 from datetime import datetime, timedelta
+import pytz
+
 
 class DbManager:
     client = MongoClient(
         'mongodb+srv://rxk40660:Admin123@cluster0.oxjxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
     db = client['project']
+    local_timezone = pytz.timezone('America/New_York')
 
     @staticmethod
     def get_users_collection():
@@ -52,7 +55,6 @@ class DbManager:
     @staticmethod
     def add_order_to_db(appliance_id, usr_email):
         product_data = DbManager.get_Appliances_Details_WithId(appliance_id)
-        print(product_data)
         usr = DbManager.get_user_by_mail(usr_email)
         customer_id = usr['_id']
         user_name = usr['firstname'] +" "+ usr['lastname']
@@ -87,7 +89,6 @@ class DbManager:
         #adding in rental agreement
         rental_collection = DbManager.get_rentals_collection()
         delivery_type = request.form.get('delivery-type')
-        print(delivery_type)
         if delivery_type == 'delivery':
             rental_start_date = request.form.get('delivery-date')
         else:
@@ -117,5 +118,26 @@ class DbManager:
         })
 
         display_data = { 'name': user_name, 'total_amount': total_amount, 'quantity': quantity, 'Product':product_data['brand']+" "+product_data['type'],  'order_id':insert_result.inserted_id, 'delivery_type': delivery_type, 'date':rental_start_date, 'address':address }
-        print(display_data)
         return is_data_saved, display_data
+
+
+    @staticmethod
+    def add_payment_details_to_db(order_info):
+        payment_collection = DbManager.get_payment_collection()
+        insert_result = payment_collection.insert_one({
+            'agreement_id': order_info['order_id'],
+            'amount': order_info['total_amount'],
+            'payment_date': datetime.now(DbManager.local_timezone),
+            'status': 'completed',
+            'card_number': request.form.get('card_number'),
+            'cvv': request.form.get('cvc'),
+            'expired_date': request.form.get('expiration_date'),
+            'name_on_card': request.form.get('name_on_card'),
+            'zip_code': request.form.get('zip'),
+            'card_type': request.form.get('card_type')
+        })
+
+        return insert_result.acknowledged
+
+
+

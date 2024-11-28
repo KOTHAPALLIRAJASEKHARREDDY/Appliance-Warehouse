@@ -1,7 +1,7 @@
 // Function to handle redirection back to the homepage or another page
 function redirectToHome() {
     // Redirecting to the homepage or you can provide any URL you'd like
-    window.location.href = '/';  // Replace with your actual homepage URL
+    window.location.href = '/dashboard';  // Replace with your actual homepage URL
 }
 
 // Function to display the correct order details based on pickup or delivery selection
