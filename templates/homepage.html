@@ -1,78 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warehouse Appliances</title>
     <link rel="stylesheet" href="../css/homepage.css">
-    <script src="../script/slideshow.js" defer></script>
+    <script src="../script/homepage.js" defer></script>
 </head>
 <body>
+    <header>
+      <h1>Warehouse Appliances</h1>
+    </header>
+    <nav>
+      <a href="#">Pay My Bill</a>
+      <a href="#">Appliances for Lease</a>
+      <a href="#">About Us</a>
+      <a href="login.html">Customer Login</a>
+    </nav>
 
-<header>
-    <h1>Warehouse Appliances</h1>
-</header>
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide">
+          <img src="/images/image7.jpg" alt="Warehouse Forklift" />
+        </div>
+        <div class="slide">
+          <img src="../images/image8.jpg" alt="Warehouse Pallet Jack" />
+        </div>
+        <div class="slide">
+          <img src="../images/image4.jpg" alt="Warehouse Conveyor Belt" />
+        </div>
+        <div class="slide">
+          <img src="../images/image5.jpg" alt="Warehouse Equipment" />
+        </div>
+      </div>
 
-<nav>
-    <a href="#">Pay My Bill</a>
-    <a href="#">Appliances for Lease</a>
-    <a href="#">About Us</a>
-    <a href="#">Customer Login</a>
-</nav>
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
 
-<div class="carousel">
-    <div class="slides">
-        <div class="slide"><img src="../images/image7.jpg" alt="Warehouse Forklift"></div>
-        <div class="slide"><img src="../images/image8.jpg" alt="Warehouse Pallet Jack"></div>
-        <div class="slide"><img src="../images/image4.jpg" alt="Warehouse Conveyor Belt"></div>
-        <div class="slide"><img src="../images/image5.jpg" alt="Warehouse Equipment"></div>
-    </div>
-
-    <!-- Buttons for Next and Previous -->
-    <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-    <button class="next" onclick="moveSlide(1)">&#10095;</button>
-
-    <!-- Dots for Navigation -->
-    <div class="dots-container">
+      <!-- Dots for Navigation -->
+      <div class="dots-container">
         <span class="dot" onclick="currentSlide(0)"></span>
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
     </div>
-</div>
 
-<div class="columns-container">
-    <div class="column">Column 1 Content</div>
-    <div class="column">Column 2 Content</div>
-    <div class="column">Column 3 Content</div>
-</div>
+    <div class="columns-container">
+      <div class="column">Column 1 Content</div>
+      <div class="column">Column 2 Content</div>
+      <div class="column">Column 3 Content</div>
+    </div>
 
-<!-- Navigation bar for Available Products -->
-<div class="product-nav">
-    <h2>Available Products</h2>
-</div>
+    <!-- Navigation bar for Available Products -->
+    <div class="product-nav">
+      <h2>Available Products</h2>
+    </div>
 
 <div class="container">
+    {% for p_data in product_data %}
     <div class="appliance">
-        <h2>Forklift</h2>
-        <p>Efficient and reliable for lifting heavy loads.</p>
-        <p>Price: $25,000</p>
+        <img style="width: 300px; height: 500px;" src="{{ p_data['image_url'] }}" alt="{{ p_data['type'] }}"><br>
+        <div class="appliance-text">
+            <h2>{{ p_data['brand'] }} {{ p_data['type'] }}</h2>
+            <p>Model : {{ p_data['model'] }}</p>
+            <p>Condition : {{ p_data['condition'] }}</p>
+            <p>Features : {% for feature in range(3) %}
+            {{ p_data['features'][feature] }} {% if feature == 2 %} . {% else %} , {% endif %}
+            {% endfor %}</p>
+            <p>Price: {{ p_data['rental_rate'] }}</p>
+            <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
+            <div class="appliance-button">
+                <button onclick="on_order('{{ p_data['_id'] }}')">Order now</button>
+                <button onclick="on_order('{{ p_data['appliance_id'] }}')">Add to cart</button>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    <div class="appliance">
-        <h2>Palett Jack</h2>
-        <p>Perfect for moving pallets and heavy items.</p>
-        <p>Price: $1,500</p>
-    </div>
-    <div class="appliance">
-        <h2>Conveyor Belt</h2>
-        <p>Streamline your warehouse operations.</p>
-        <p>Price: $10,000</p>
-    </div>
-</div>
 
-<footer>
-    <p>&copy; 2024 Warehouse Solutions Inc.</p>
-</footer>
-
-</body>
+    <footer>
+      <p>&copy; 2024 Warehouse Solutions Inc.</p>
+    </footer>
+  </body>
 </html>

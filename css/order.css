@@ -6,38 +6,15 @@
 }
 
 body {
-    flex-direction: column;
-    align-items: center;
-    background-color: #f3f3f3;
-}
-
-h1 {
-    color: #333;
-}
-
-
-
-footer {
-    margin-top: 20px;
-    color: #888;
-}
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f3f3f3;
+    background-color: #f1f1f1; 
     margin: 0;
 }
 
 h1, p, h2, h3, label {
-    color: #333;
+    color: #333; 
 }
 
 .bold {
@@ -66,19 +43,21 @@ h1, p, h2, h3, label {
     height: auto;
 }
 
+
 .details-section {
     flex: 2;
-    background-color: #fff;
+    background-color: #ffffff; 
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .order-btn {
     display: block;
     width: 100%;
     padding: 12px;
-    background-color: #007bff;
+    background-color: #4CAF50; 
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -88,13 +67,15 @@ h1, p, h2, h3, label {
 }
 
 .order-btn:hover {
-    background-color: #0056b3;
+    background-color: #45a049; 
 }
+
 
 footer {
     margin-top: 20px;
-    color: #888;
+    color: #777; 
 }
+
 
 form label, form p, form input, form select {
     display: block;
@@ -102,23 +83,73 @@ form label, form p, form input, form select {
     margin-bottom: 10px;
 }
 
+
 form input, form select {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-..details-section div {
+
+
+.details-section div {
     display: flex;
-    align-items:margin-left;  /* Vertically center the radio button and label */
-    justify-content: flex-start;  /* Align everything to the left (starting from the border) */
-    margin-bottom: 10px; /* Space between radio button options */
+    align-items: center;  
+    justify-content: flex-start;  
+    margin-bottom: 10px; 
 }
 
 .details-section input[type="radio"] {
-    margin-right: 10px; /* Space between radio button and label */
+    margin-right: 10px; 
 }
 
-/* Adjusting label styling */
+
 .details-section label {
-    margin-left: 5px; /* Space between radio button and label text */
+    margin-left: 5px; 
+}
+
+
+input[type="date"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    margin-top: 10px;
+}
+
+
+#price, #deposit {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; 
+}
+
+
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+label[for="quantity"] {
+    margin-top: 15px;
+}
+
+
+.delivery-type-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 40%;
+    margin-bottom: 20px;
+}
+
+
+.delivery-date-container,
+#pickup-date-container {
+    display: none;
+}
+
+
+.details-section input[type="radio"]:checked + label {
+    color: #4CAF50;
 }

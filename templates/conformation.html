@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="../css/conformation.css">
+</head>
+<body>
+    <script src="../script/conformation.js"></script>
+
+    <div class="confirmation-container">
+        <h1>Order Confirmed!</h1>
+        <p>Your order has been successfully placed. Below are the details:</p>
+
+        <!-- Order Details Section -->
+        <div class="order-details">
+            <p><strong>Order ID:</strong> <span id="order-id">#{{ display_data['order_id'] }}</span></p>
+            <p><strong>Customer Name:</strong> <span id="customer-name">{{ display_data['name'] }}</span></p>
+            <p><strong>Product:</strong> <span id="product-name"> {{ display_data['Product'] }}</span></p>
+            <p><strong>Quantity:</strong> <span id="product-quantity">{{ display_data['quantity'] }}</span></p>
+            <p><strong>Total Price:</strong> $<span id="total-price">{{ display_data['total_amount'] }}</span></p>
+        </div>
+        <button id="back-home-btn" onclick="showOrderDetails('{{ display_data['delivery_type'] }}')">Show Order Details</button>
+
+
+        <!-- Pickup Details (Initially hidden) -->
+        <div id="pickup-details" class="details-section" style="display: none;">
+            <h3>Pickup Details:</h3>
+            <p><strong>Pickup Location:</strong> <span id="pickup-location">Tech Store - Downtown</span></p>
+            <p><strong>Pickup Time:</strong> <span id="pickup-time">{{ display_data['date'] }}, between 10:00 AM - 5:00 PM</span></p>
+            
+        </div>
+
+        <!-- Delivery Details (Initially hidden) -->
+        <div id="delivery-details" class="details-section" style="display: none;">
+            <h3>Delivery Details:</h3>
+            <p><strong>Delivery Address:</strong> <span id="delivery-address">{{ display_data['address'] }}</span></p>
+            <p><strong>Estimated Delivery Date:</strong>  {{ display_data['date'] }}, between 10:00 AM - 5:00 PM </p>
+            
+        </div>
+
+        <!-- Back to Homepage Button -->
+        <button id="back-home-btn2" onclick="redirectToHome()">Back to Homepage</button>
+    </div>
+
+   
+</body>
+</html>
