@@ -1,3 +1,4 @@
+from django.contrib.admin import display
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for, flash, jsonify, session
 from dbManager import DbManager
 from validators import validate_input
@@ -120,9 +121,11 @@ def admin_dashboard():
 
 @app.route('/placeorder', methods=['POST'])
 def place_order():
-    is_success = DbManager.add_order_to_db(request.args.get('product_id'), session.get('email'))
+    is_success, display_info = DbManager.add_order_to_db(request.args.get('product_id'), session.get('email'))
     if is_success:
-        return redirect('/conform?product_id=' + request.args.get('product_id'))
+        #return redirect('/conform?product_id=' + request.args.get('product_id'))
+        print(f"the data {display_info}")
+        return render_template('conformation.html', display_data=display_info)
     else:
         return "failed"
 

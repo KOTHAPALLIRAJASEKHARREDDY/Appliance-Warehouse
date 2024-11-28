@@ -51,8 +51,8 @@ class DbManager:
 
     @staticmethod
     def add_order_to_db(appliance_id, usr_email):
-        print(appliance_id, usr_email)
         product_data = DbManager.get_Appliances_Details_WithId(appliance_id)
+        print(product_data)
         usr = DbManager.get_user_by_mail(usr_email)
         customer_id = usr['_id']
         user_name = usr['firstname'] +" "+ usr['lastname']
@@ -101,7 +101,7 @@ class DbManager:
         return_status = 'not returned'
         damage_report = 'none'
 
-        rental_collection.insert_one({
+        insert_result = rental_collection.insert_one({
             'appliance_id': ObjectId(appliance_id),
             'customer_id': customer_id,
             'rental_start_date': rental_start_date,
@@ -116,4 +116,6 @@ class DbManager:
             'delivery_type': delivery_type
         })
 
-        return is_data_saved
+        display_data = { 'name': user_name, 'total_amount': total_amount, 'quantity': quantity, 'Product':product_data['brand']+" "+product_data['type'],  'order_id':insert_result.inserted_id, 'delivery_type': delivery_type, 'date':rental_start_date, 'address':address }
+        print(display_data)
+        return is_data_saved, display_data
