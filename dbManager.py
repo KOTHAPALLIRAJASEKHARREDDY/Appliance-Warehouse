@@ -124,6 +124,7 @@ class DbManager:
     @staticmethod
     def add_payment_details_to_db(order_info):
         payment_collection = DbManager.get_payment_collection()
+        print(order_info)
         insert_result = payment_collection.insert_one({
             'agreement_id': order_info['order_id'],
             'amount': order_info['total_amount'],
