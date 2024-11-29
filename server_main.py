@@ -27,7 +27,15 @@ def login():
         if isLogin:
             session.permanent = True
             session['email'] = request.form.get('username', '').strip()
-            return jsonify({'status': 'success', 'user_data': user})
+            if session.get('redirect') :
+                args = session.pop('redirect')
+                user['type'] = 'redirect'
+                user['redirect'] = args['redirect']
+                if 'params' in args and args['params'] is not None:
+                    user['params'] = args['params']
+                return jsonify({'status': 'success', 'user_data': user})
+            else:
+                return jsonify({'status': 'success', 'user_data': user})
             # return redirect(url_for('user_dashboard'))
         else:
             # flash('Invalid username or password')
@@ -155,7 +163,12 @@ def conform():
 
 @app.route('/order')
 def order_page():
-    return render_template('order.html', item_Details = DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
+    print(f' from order :: {request.args.get('product_id')}')
+    if session.get('email') is None:
+        session['redirect'] = { "redirect":"/order", "params": {'product_id':request.args.get('product_id')}}
+        return redirect(url_for('login'))
+    else:
+        return render_template('order.html', item_Details = DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
 
 
 @app.route('/css/<path:filename>')

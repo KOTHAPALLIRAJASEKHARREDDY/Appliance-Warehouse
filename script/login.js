@@ -23,6 +23,15 @@ document
           localStorage.setItem("user_data", JSON.stringify(userData));
           if (userData.type === "admin") {
             window.location.href = "/admindashboard";
+          } else if (userData.type === "redirect")
+          {
+              const parameters = new URLSearchParams(userData.params).toString();
+              if (parameters) {
+                  window.location.href = userData.redirect + "?" + parameters;
+              }
+              else {
+                  window.location.href = userData.redirect;
+              }
           } else {
             window.location.href = "/dashboard";
           }
