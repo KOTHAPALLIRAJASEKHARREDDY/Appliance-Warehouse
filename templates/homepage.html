@@ -4,12 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Warehouse Appliances</title>
-    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/homepage.css" />
     <script src="../script/homepage.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-      <h1>Warehouse Appliances</h1>
+      <h1
+        id="project-name"
+        onclick="window.location.href = '/'"
+        style="cursor: pointer"
+      >
+        Warehouse Appliances
+      </h1>
+      <div id="cart-container" onclick="onCartClick()">
+        <img src="../images/cart-icon.png" alt="Cart Icon" id="cart-icon" />
+        <span id="cart-count">0</span>
+      </div>
     </header>
     <nav>
       <a href="#">Pay My Bill</a>
@@ -57,23 +67,31 @@
       <h2>Available Products</h2>
     </div>
 
-<div class="container">
-    {% for p_data in product_data %}
-    <div class="appliance">
-        <img style="width: 300px; height: 500px;" src="{{ p_data['image_url'] }}" alt="{{ p_data['type'] }}"><br>
+    <div class="container">
+      {% for p_data in product_data %}
+      <div class="appliance">
+        <img
+          style="width: 300px; height: 500px"
+          src="{{ p_data['image_url'] }}"
+          alt="{{ p_data['type'] }}"
+        /><br />
         <div class="appliance-text">
-            <h2>{{ p_data['brand'] }} {{ p_data['type'] }}</h2>
-            <p>Model : {{ p_data['model'] }}</p>
-            <p>Condition : {{ p_data['condition'] }}</p>
-            <p>Features : {% for feature in range(3) %}
-            {{ p_data['features'][feature] }} {% if feature == 2 %} . {% else %} , {% endif %}
-            {% endfor %}</p>
-            <p>Price: {{ p_data['rental_rate'] }}</p>
-            <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
-            <div class="appliance-button">
-                <button onclick="on_order('{{ p_data['_id'] }}')">Order now</button>
-                <button onclick="on_order('{{ p_data['appliance_id'] }}')">Add to cart</button>
-            </div>
+          <h2>{{ p_data['brand'] }} {{ p_data['type'] }}</h2>
+          <p>Model : {{ p_data['model'] }}</p>
+          <p>Condition : {{ p_data['condition'] }}</p>
+          <p>
+            Features : {% for feature in range(3) %} {{
+            p_data['features'][feature] }} {% if feature == 2 %} . {% else %} ,
+            {% endif %} {% endfor %}
+          </p>
+          <p>Price: {{ p_data['rental_rate'] }}</p>
+          <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
+          <div class="appliance-button">
+            <button onclick="on_order('{{ p_data['_id'] }}')">Order now</button>
+            <button onclick="addToCart('{{ p_data['appliance_id'] }}')">
+              Add to cart
+            </button>
+          </div>
         </div>
       </div>
       {% endfor %}

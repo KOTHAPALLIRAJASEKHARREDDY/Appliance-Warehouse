@@ -21,7 +21,8 @@ def user_login(collection):
         # if username.lower() == 'admin' and password == 'Admin.123':
         #     return True, admin
         # else:
-        isLogin, user = check_for_user_credentials(username, password, collection)
+        isLogin, user = check_for_user_credentials(
+            username, password, collection)
 
         return isLogin, user
         # if isLogin:
@@ -42,6 +43,7 @@ def check_for_user_credentials(username, password, collection):
             'username': user['email'],
             'firstname': user['firstname'],
             'lastname': user['lastname'],
+            'address': user['address'],
             'type': user['type'] if 'type' in user else 'user',
         }
         return True, user_data

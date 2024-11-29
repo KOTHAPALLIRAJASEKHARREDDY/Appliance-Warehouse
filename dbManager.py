@@ -1,3 +1,5 @@
+import re
+from bson import ObjectId
 from pymongo import MongoClient
 from flask import request
 from bson import ObjectId
@@ -51,13 +53,12 @@ class DbManager:
         collection = DbManager.get_users_collection()
         return collection.find_one({'email': mail})
 
-
     @staticmethod
     def add_order_to_db(appliance_id, usr_email):
         product_data = DbManager.get_Appliances_Details_WithId(appliance_id)
         usr = DbManager.get_user_by_mail(usr_email)
         customer_id = usr['_id']
-        user_name = usr['firstname'] +" "+ usr['lastname']
+        user_name = usr['firstname'] + " " + usr['lastname']
         address = usr['address']
         phone = usr['phone']
         email = usr['email']
@@ -66,7 +67,8 @@ class DbManager:
         customer_collection = DbManager.get_customers_collection()
         is_data_saved = False
         if customer_details is None:
-            rental_history = [{ 'appliance_id':appliance_id, 'quantity': quantity, 'insurance': request.form.get('insurance') }]
+            rental_history = [{'appliance_id': appliance_id,
+                               'quantity': quantity, 'insurance': request.form.get('insurance')}]
             is_data_saved = customer_collection.insert_one({
                 'customer_id': customer_id,
                 'user_name': user_name,
@@ -79,14 +81,16 @@ class DbManager:
             rental_history = customer_details['rental_history']
             found = False
             for entry in rental_history:
-                if(entry['appliance_id'] == appliance_id and entry['insurance'] == request.form.get('insurance')):
+                if (entry['appliance_id'] == appliance_id and entry['insurance'] == request.form.get('insurance')):
                     entry['quantity'] = entry['quantity'] + quantity
                     found = True
                     break
             if not found:
-                rental_history.append({ 'appliance_id':appliance_id, 'quantity': quantity, 'insurance': request.form.get('insurance') })
-            is_data_saved = customer_collection.update_one({'customer_id': customer_id}, {'$set' : {'rental_history': rental_history}} )
-        #adding in rental agreement
+                rental_history.append(
+                    {'appliance_id': appliance_id, 'quantity': quantity, 'insurance': request.form.get('insurance')})
+            is_data_saved = customer_collection.update_one(
+                {'customer_id': customer_id}, {'$set': {'rental_history': rental_history}})
+        # adding in rental agreement
         rental_collection = DbManager.get_rentals_collection()
         delivery_type = request.form.get('delivery-type')
         if delivery_type == 'delivery':
@@ -94,11 +98,12 @@ class DbManager:
         else:
             rental_start_date = request.form.get('pickup-date')
         rental_start_date = datetime.strptime(rental_start_date, '%Y-%m-%d')
-        rental_end_date = rental_start_date+ timedelta(days=7)
+        rental_end_date = rental_start_date + timedelta(days=7)
         rental_rate = int(product_data['rental_rate']) * quantity
         deposit_amount = int(product_data['deposit_amount']) * quantity
         total_amount = rental_rate + deposit_amount
-        insurance_status = "Active" if request.form.get('insurance') == "yes" else "In Active"
+        insurance_status = "Active" if request.form.get(
+            'insurance') == "yes" else "In Active"
         return_status = 'not returned'
         damage_report = 'none'
 
@@ -142,3 +147,84 @@ class DbManager:
 
 
 
+
+    @staticmethod
+    def add_order_to_db_cart(product, user):
+        product_id = product['_id']
+        print(product_id, user['username'])
+        product_data = DbManager.get_Appliances_Details_WithId(product_id)
+        usr = DbManager.get_user_by_mail(user['username'])
+        customer_id = usr['_id']
+        user_name = usr['firstname'] + " " + usr['lastname']
+        address = usr['address']
+        phone = usr['phone']
+        email = usr['email']
+        quantity = int(product.get('quantity'))
+        customer_details = DbManager.get_customers_details(customer_id)
+        customer_collection = DbManager.get_customers_collection()
+        is_data_saved = False
+        if customer_details is None:
+            rental_history = [{'appliance_id': product_id,
+                               'quantity': quantity, 'insurance': product.get('insurance')}]
+            is_data_saved = customer_collection.insert_one({
+                'customer_id': customer_id,
+                'user_name': user_name,
+                'address': address,
+                'phone_number': phone,
+                'email': email,
+                'rental_history': rental_history
+            })
+        else:
+            rental_history = customer_details['rental_history']
+            found = False
+            for entry in rental_history:
+                if (entry['appliance_id'] == product_id and entry['insurance'] == product.get('insurance')):
+                    entry['quantity'] = entry['quantity'] + quantity
+                    found = True
+                    break
+            if not found:
+                rental_history.append(
+                    {'appliance_id': product_id, 'quantity': quantity, 'insurance': product.get('insurance')})
+            is_data_saved = customer_collection.update_one(
+                {'customer_id': customer_id}, {'$set': {'rental_history': rental_history}})
+        # adding in rental agreement
+        rental_collection = DbManager.get_rentals_collection()
+        delivery_type = product.get('deliveryType')
+        print(delivery_type)
+        if delivery_type == 'delivery':
+            rental_start_date = product.get('deliveryDate')
+        else:
+            rental_start_date = product.get('deliveryDate')
+        rental_start_date = datetime.strptime(rental_start_date, '%Y-%m-%d')
+        rental_end_date = rental_start_date + timedelta(days=7)
+        rental_rate = int(product_data['rental_rate']) * quantity
+        deposit_amount = int(product_data['deposit_amount']) * quantity
+        total_amount = rental_rate + deposit_amount
+        insurance_status = "Active" if request.form.get(
+            'insurance') == "yes" else "In Active"
+        return_status = 'not returned'
+        damage_report = 'none'
+
+        rental_collection_obj = {
+            'appliance_id': ObjectId(product_id),
+            'customer_id': customer_id,
+            'rental_start_date': rental_start_date,
+            'rental_end_date': rental_end_date,
+            'quantity': quantity,
+            'rental_rate': rental_rate,
+            'deposit_amount': deposit_amount,
+            'total_amount': total_amount,
+            'insurance_status': insurance_status,
+            'return_status': return_status,
+            'damage_report': damage_report,
+            'delivery_type': delivery_type
+        }
+
+        rental_cursor = rental_collection.insert_one(rental_collection_obj)
+        rental_collection_obj['_id'] = str(rental_cursor.inserted_id)
+        rental_collection_obj['appliance_id'] = str(
+            rental_collection_obj['appliance_id'])
+        rental_collection_obj['customer_id'] = str(
+            rental_collection_obj['customer_id'])
+
+        return is_data_saved, rental_collection_obj

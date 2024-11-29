@@ -39,7 +39,8 @@ callGetRentals = () => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      if (data.length == 0) {
+      const result = data.data;
+      if (result.length == 0) {
         document.getElementById("no-rentals").style.display = "block";
         document.getElementById("history").style.display = "none";
         return;
@@ -47,13 +48,13 @@ callGetRentals = () => {
         document.getElementById("no-rentals").style.display = "none";
         document.getElementById("history").style.display = "block";
       }
-      const ongoingRentals = data.filter(
+      const ongoingRentals = result.filter(
         (rental) =>
           rental.return_status != "Returned" &&
           new Date(rental.rental_end_date) >= new Date()
       );
       populateOngoingRentals(ongoingRentals);
-      const rentalHistory = data.filter(
+      const rentalHistory = result.filter(
         (rental) => rental.return_status == "Returned"
       );
       populateRentalHistory(rentalHistory);

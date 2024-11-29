@@ -43,3 +43,14 @@ def delete_appliance_db(appliance_id):
     if result.deleted_count == 1:
         return True
     return False
+
+
+def find_appliances_by_id(appliances_list):
+    appliance_collection = DbManager.get_appliances_collection()
+    appliances = []
+    for appliance_id in appliances_list:
+        appliance = appliance_collection.find_one(
+            {'_id': ObjectId(appliance_id)})
+        appliance['_id'] = str(appliance['_id'])
+        appliances.append(appliance)
+    return appliances

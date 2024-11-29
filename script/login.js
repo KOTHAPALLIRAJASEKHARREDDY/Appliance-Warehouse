@@ -33,7 +33,7 @@ document
                   window.location.href = userData.redirect;
               }
           } else {
-            window.location.href = "/dashboard";
+            window.location.href = "/";
           }
         } else {
           document.getElementById("message").innerText = data.message;
