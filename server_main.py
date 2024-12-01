@@ -32,7 +32,7 @@ def login():
         if isLogin:
             session.permanent = True
             session['email'] = request.form.get('username', '').strip()
-            if session.get('redirect') :
+            if session.get('redirect'):
                 args = session.pop('redirect')
                 user['type'] = 'redirect'
                 user['redirect'] = args['redirect']
@@ -155,10 +155,11 @@ def cart_page():
 
 @app.route('/placeorder', methods=['POST'])
 def place_order():
-    is_success, display_info = DbManager.add_order_to_db(request.args.get('product_id'), session.get('email'))
+    is_success, display_info = DbManager.add_order_to_db(
+        request.args.get('product_id'), session.get('email'))
     if is_success:
-        #return redirect('/conform?product_id=' + request.args.get('product_id'))
-        #return render_template('conformation.html', display_data=display_info)
+        # return redirect('/conform?product_id=' + request.args.get('product_id'))
+        # return render_template('conformation.html', display_data=display_info)
         display_info['order_id'] = str(display_info['order_id'])
         session['order_info'] = display_info
         return redirect(url_for('payment'))
@@ -175,6 +176,7 @@ def checkout_page():
     print(user)
     products = request.get_json().get('products')
     print(products)
+    paymentData = request.get_json().get('paymentData')
 
     saved_data = []
     for product in products:
@@ -185,12 +187,17 @@ def checkout_page():
         saved_data.append(saved_product)
 
     if saved_data.__len__() == products.__len__():
-        return {'status': 'success', 'message': 'Order placed successfully', 'data': {'user': user, 'products': saved_data}}
+        is_success = DbManager.add_cart_payment_details_to_db(
+            saved_data, paymentData)
+        if is_success:
+            return {'status': 'success', 'message': 'Order placed successfully', 'data': {'user': user, 'products': saved_data}}
+        else:
+            return {'status': 'failure', 'message': 'Failed to save payment details'}
     else:
         return {'status': 'failure', 'message': 'Failed to place order'}
 
 
-@app.route('/payment', methods=['GET','POST'])
+@app.route('/payment', methods=['GET', 'POST'])
 def payment():
     data = session.get('order_info')
     if request.method == 'GET':
@@ -203,6 +210,15 @@ def payment():
             return render_template('conformation.html', display_data=data)
         else:
             return "Issue Happened try again later"
+
+
+@app.route('/cartpayment', methods=['GET'])
+@app.route('/cartpayment.html', methods=['GET'])
+def cart_payment():
+    if session.get('email') is None:
+        return redirect(url_for('login'))
+    return render_template('cartpayment.html')
+
 
 @app.route('/conform')
 def conform():
@@ -228,10 +244,11 @@ def checkout_confirmation():
 @app.route('/order')
 def order_page():
     if session.get('email') is None:
-        session['redirect'] = { "redirect":"/order", "params": {'product_id':request.args.get('product_id')}}
+        session['redirect'] = {
+            "redirect": "/order", "params": {'product_id': request.args.get('product_id')}}
         return redirect(url_for('login'))
     else:
-        return render_template('order.html', item_Details = DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
+        return render_template('order.html', item_Details=DbManager.get_Appliances_Details_WithId(request.args.get('product_id')))
 
 
 @app.route('/css/<path:filename>')

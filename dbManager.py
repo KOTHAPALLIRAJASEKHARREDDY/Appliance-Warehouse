@@ -122,9 +122,9 @@ class DbManager:
             'delivery_type': delivery_type
         })
 
-        display_data = { 'name': user_name, 'total_amount': total_amount, 'quantity': quantity, 'Product':product_data['brand']+" "+product_data['type'],  'order_id':insert_result.inserted_id, 'delivery_type': delivery_type, 'date':rental_start_date, 'address':address }
+        display_data = {'name': user_name, 'total_amount': total_amount, 'quantity': quantity,
+                        'Product': product_data['brand']+" "+product_data['type'],  'order_id': insert_result.inserted_id, 'delivery_type': delivery_type, 'date': rental_start_date, 'address': address}
         return is_data_saved, display_data
-
 
     @staticmethod
     def add_payment_details_to_db(order_info):
@@ -145,8 +145,25 @@ class DbManager:
 
         return insert_result.acknowledged
 
+    @staticmethod
+    def add_cart_payment_details_to_db(products, paymentData):
+        payment_collection = DbManager.get_payment_collection()
+        print(paymentData)
+        product_id = products[0]['_id']
+        insert_result = payment_collection.insert_one({
+            'agreement_id': ObjectId(product_id),
+            'amount': paymentData.get('amount'),
+            'payment_date': datetime.now(DbManager.local_timezone),
+            'status': 'completed',
+            'card_number': paymentData.get('card_number'),
+            'cvv': paymentData.get('cvc'),
+            'expired_date': paymentData.get('expiration_date'),
+            'name_on_card': paymentData.get('name_on_card'),
+            'zip_code': paymentData.get('zip'),
+            'card_type': paymentData.get('card_type')
+        })
 
-
+        return insert_result.acknowledged
 
     @staticmethod
     def add_order_to_db_cart(product, user):

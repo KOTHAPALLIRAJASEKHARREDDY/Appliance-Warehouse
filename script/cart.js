@@ -101,6 +101,9 @@ const callGetProducts = () => {
       <div style="text-align:right">
           <h3>Total Rental Rate: $<span id="total-rate">${totalRate}</span></h3>
           <h3>Total Deposit Amount: $<span id="total-deposit">${totalDeposit}</span></h3>
+          <h3>Total Amount: $<span id="total-amount">${
+            totalRate + totalDeposit
+          }</span></h3>
         </div>
         <div class="checkout-container">
           <button class="checkout-button" onclick='onCartClick()'>Checkout</button>
@@ -179,35 +182,40 @@ const onCartClick = () => {
   console.log("Final products array:", products);
   const user = JSON.parse(localStorage.getItem("user_data"));
   console.log(user);
-  fetch("/checkout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user: user,
-      products: products,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.status === "success") {
-        alert("Checkout successful!");
-        localStorage.setItem("cart", JSON.stringify([]));
-        window.dispatchEvent(new Event("cartUpdated"));
-        const productIds = data.data.products
-          .map((product) => product._id)
-          .join(",");
-        const queryParams = `?productIds=${productIds}`;
 
-        // Redirect to confirmation page with query parameters
-        window.location.href = `/checkoutConfirmation${queryParams}`;
+  localStorage.setItem("checkoutProducts", JSON.stringify(products));
+  // Redirect to payment page
+  window.location.href = "/cartpayment.html";
 
-        //callGetProducts();
-      } else {
-        alert("Checkout failed. Please try again.");
-      }
-    });
+  // fetch("/checkout", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     user: user,
+  //     products: products,
+  //   }),
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     if (data.status === "success") {
+  //       alert("Checkout successful!");
+  //       localStorage.setItem("cart", JSON.stringify([]));
+  //       window.dispatchEvent(new Event("cartUpdated"));
+  //       const productIds = data.data.products
+  //         .map((product) => product._id)
+  //         .join(",");
+  //       const queryParams = `?productIds=${productIds}`;
+
+  //       // Redirect to confirmation page with query parameters
+  //       window.location.href = `/checkoutConfirmation${queryParams}`;
+
+  //       //callGetProducts();
+  //     } else {
+  //       alert("Checkout failed. Please try again.");
+  //     }
+  //   });
 
   // You can send the products array to the backend or perform other actions here
 };

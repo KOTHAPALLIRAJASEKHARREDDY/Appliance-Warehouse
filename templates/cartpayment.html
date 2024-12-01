@@ -11,8 +11,6 @@
     <link href="../css/payment_page.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
-    <script src="../script/payment_page.js"></script>
-
     <div class="payment-container">
       <div class="payment-header">
         <h2>Secure Payment</h2>
@@ -22,11 +20,11 @@
       <div class="payment-options">
         <div class="total-amount-container">
           <span>Total Amount:</span>
-          <span class="total-amount">${{ order_data['total_amount'] }}.00</span>
+          <span id="cart-total-amount"></span>
         </div>
       </div>
 
-      <form id="payment-form" action="/payment" method="POST">
+      <form id="payment-form">
         <h3>Payment Details</h3>
 
         <!-- Card Type Section -->
@@ -115,5 +113,6 @@
 
       <p class="powered-by">Powered by Stripe • VISA</p>
     </div>
+    <script src="../script/cartpayment_page.js"></script>
   </body>
 </html>
