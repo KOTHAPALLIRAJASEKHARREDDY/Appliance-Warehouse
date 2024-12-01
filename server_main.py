@@ -1,5 +1,7 @@
 import re
 import json
+from doctest import debug
+
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for, flash, jsonify, session
 from dbManager import DbManager
 from validators import validate_input
