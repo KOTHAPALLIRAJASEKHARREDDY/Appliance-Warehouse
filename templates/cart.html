@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warehouse Appliances</title>
+    <link rel="stylesheet" href="../css/cart.css" />
+    <script src="../script/cart.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1
+        id="project-name"
+        onclick="window.location.href = '/'"
+        style="cursor: pointer"
+      >
+        Warehouse Appliances
+      </h1>
+      <div id="cart-container" onclick="onCartClick()">
+        <img src="../images/cart-icon.png" alt="Cart Icon" id="cart-icon" />
+        <span id="cart-count">0</span>
+      </div>
+    </header>
+
+    <section>
+      <h2 style="text-align: center; padding: 20px">Shopping Cart</h2>
+      <div id="cart-items">
+        <!-- Cart items will be added here -->
+      </div>
+    </section>
+    <!-- <nav>
+      <a href="#">Pay My Bill</a>
+      <a href="#">Appliances for Lease</a>
+      <a href="#">About Us</a>
+      <a href="login.html">Customer Login</a>
+    </nav> -->
+
+    <footer>
+      <p>&copy; 2024 Warehouse Solutions Inc.</p>
+    </footer>
+  </body>
+</html>

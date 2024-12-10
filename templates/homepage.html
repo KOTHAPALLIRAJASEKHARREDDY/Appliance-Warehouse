@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warehouse Appliances</title>
+    <link rel="stylesheet" href="../css/homepage.css" />
+    <script src="../script/homepage.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1
+        id="project-name"
+        onclick="window.location.href = '/'"
+        style="cursor: pointer"
+      >
+        Warehouse Appliances
+      </h1>
+      <div id="cart-container" onclick="onCartClick()">
+        <img src="../images/cart-icon.png" alt="Cart Icon" id="cart-icon" />
+        <span id="cart-count">0</span>
+      </div>
+    </header>
+    <nav>
+      <a href="#">Pay My Bill</a>
+      <a href="#">Appliances for Lease</a>
+      <a href="#">About Us</a>
+      <a href="login.html">Customer Login</a>
+    </nav>
+
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide">
+          <img src="/images/image7.jpg" alt="Warehouse Forklift" />
+        </div>
+        <div class="slide">
+          <img src="../images/image8.jpg" alt="Warehouse Pallet Jack" />
+        </div>
+        <div class="slide">
+          <img src="../images/image4.jpg" alt="Warehouse Conveyor Belt" />
+        </div>
+        <div class="slide">
+          <img src="../images/image5.jpg" alt="Warehouse Equipment" />
+        </div>
+      </div>
+
+      <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+      <button class="next" onclick="moveSlide(1)">&#10095;</button>
+
+      <!-- Dots for Navigation -->
+      <div class="dots-container">
+        <span class="dot" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+
+    <div class="columns-container">
+      <div class="column"><div class="Highlight">
+              <div class="Highlight1Icon">
+              </div>
+              <div class="Highlight1title">
+                  <b>Full Delivery and Installation</b>
+              </div>
+
+              <div class="Highlight1content">
+                  Our Technicians make sure your equipment is fully installed and working properly.
+              </div>
+          </div>
+      </div>
+      <div class="column"><div class="Highlight Highlight2" style="">
+                        <div class="Highlight2Icon">
+                        </div>
+                        <div class="Highlight1title">
+                            <b>Low Monthly Rate</b>
+                        </div>
+
+                        <div class="Highlight1content">
+                            Avoid the upfront cost and get the equipment you need for one low monthly rate.
+                        </div>
+                    </div></div>
+      <div class="column"><div class="Highlight3Icon">
+                        </div>
+                        <div class="Highlight1title">
+                            <b>Free Best-In-Class Service</b>
+                        </div>
+
+                        <div class="Highlight1content">
+                            Service and parts from our certified technicians are included for your entire lease period.
+                        </div>
+                    </div></div>
+    </div>
+
+    <!-- Navigation bar for Available Products -->
+    <div class="product-nav">
+      <h2>Available Products</h2>
+    </div>
+
+    <div class="container">
+      {% for p_data in product_data %}
+      <div class="appliance">
+        <img
+          style="width: 300px; height: 500px"
+          src="{{ p_data['image_url'] }}"
+          alt="{{ p_data['type'] }}"
+        /><br />
+        <div class="appliance-text">
+          <h2>{{ p_data['brand'] }} {{ p_data['type'] }}</h2>
+          <p>Model : {{ p_data['model'] }}</p>
+          <p>Condition : {{ p_data['condition'] }}</p>
+          <p>
+            Features : {% for feature in range(3) %} {{
+            p_data['features'][feature] }} {% if feature == 2 %} . {% else %} ,
+            {% endif %} {% endfor %}
+          </p>
+          <p>Price: {{ p_data['rental_rate'] }}</p>
+          <p>Deposit Amount: {{ p_data['deposit_amount'] }}</p>
+          <div class="appliance-button">
+            <button onclick="on_order('{{ p_data['_id'] }}')">Order now</button>
+            <button onclick="addToCart('{{ p_data['appliance_id'] }}')">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Warehouse Solutions Inc.</p>
+    </footer>
+  </body>
+</html>
