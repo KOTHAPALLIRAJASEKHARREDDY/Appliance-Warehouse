@@ -1,4 +1,4 @@
-kbody {
+body {
     background-color: #b2e2ed;
     font-family: Arial, sans-serif;
 }
@@ -40,12 +40,11 @@ input[type="password"]
 
 input[type="date"] 
 {
-    width: 80%;
+    width: 92%;
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-   
 }
 
 input[type="submit"]{
