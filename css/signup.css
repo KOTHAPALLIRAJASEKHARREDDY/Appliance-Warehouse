@@ -1,4 +1,4 @@
-body {
+kbody {
     background-color: #b2e2ed;
     font-family: Arial, sans-serif;
 }
@@ -28,12 +28,24 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-input[type="password"] {
+input[type="password"]
+{
     width: 95%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+
+input[type="date"] 
+{
+    width: 80%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+   
 }
 
 input[type="submit"]{
