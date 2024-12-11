@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Order Approval</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #f4f4f9, #d6e1e9);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            display: flex;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .order-details h2, .status-update h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .order-details p, .status-update p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* Styling for the search bar and button */
+        .search-container {
+            width: 80%;
+            margin: 20px auto;
+            display: flex; /* Flexbox for side-by-side elements */
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .search-container input[type="text"] {
+            width: 100%; /* Adjust width of the search input */
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-right: 10px; /* Space between input and button */
+            transition: border-color 0.3s;
+        }
+
+        .search-container input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .search-container button {
+            width: 30%;
+            padding: 12px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+
+        .order-details, .status-update {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-details {
+            margin-right: 20px;
+        }
+
+        .form-group select,
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group button:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .order-details, .status-update {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .order-details {
+                margin-right: 0;
+            }
+
+            .search-container {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .search-container input[type="text"],
+            .search-container button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .search-container input[type="text"]:last-child {
+                margin-right: 0;
+            }
+        }
+
+            .header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Flex container for header content */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Increased font size for the Welcome message */
+    .header h2 {
+      font-size: 36px;
+      margin: 0;
+    }
+
+    /* Menu dropdown styling */
+    .menu-dropdown {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .menu-btn {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
+    .menu-dropdown ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-radius: 8px;
+      z-index: 1;
+      width: 200px; /* Ensure dropdown has a fixed width for alignment */
+    }
+
+    .menu-dropdown ul li {
+      padding: 10px 20px; /* Add padding for alignment */
+      white-space: nowrap;
+    }
+
+    .menu-dropdown ul li a {
+      color: #333;
+      text-decoration: none;
+      display: block;
+      text-align: left; /* Align all menu items to the left */
+    }
+
+    .menu-dropdown ul li:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Show dropdown on hover */
+    .menu-dropdown:hover ul {
+      display: block;
+    }
+
+    /* Profile icon and dropdown */
+    .profile-menu {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    /* Profile icon styling */
+    .profile-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #007bff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      text-transform: uppercase;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+    }
+
+    /* Profile letter inside icon */
+    #profile-letter {
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    /* Dropdown menu positioning and visibility */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 50px; /* Adjust dropdown position */
+      right: 0;
+      background-color: white;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 150px;
+      z-index: 1;
+    }
+
+    /* Style for dropdown items */
+    .dropdown-menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dropdown-menu ul li {
+      padding: 10px 15px;
+      text-align: left;
+    }
+
+    .dropdown-menu ul li a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+    }
+
+    .dropdown-menu ul li:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Fix for hover on profile icon to show dropdown */
+    .profile-icon:hover + .dropdown-menu,
+    .profile-menu:hover .dropdown-menu {
+      display: block;
+    }
+
+    </style>
+    <script>
+    function search_items() {
+        const searchQuery = document.getElementById('search').value.toLowerCase();
+        const orderContainers = document.querySelectorAll('.container');
+
+        orderContainers.forEach(container => {
+            const orderId = container.querySelector('.order-details p strong').textContent.toLowerCase();
+            const customerName = container.querySelector('.order-details p:nth-child(2)').textContent.toLowerCase();
+            const product = container.querySelector('.order-details p:nth-child(3)').textContent.toLowerCase();
+            console.log(product);
+            if (orderId.includes(searchQuery) || customerName.includes(searchQuery) || product.includes(searchQuery)) {
+                container.style.display = 'flex';
+            } else {
+                container.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('search').addEventListener('keyup', search_items);
+</script>
+
+</head>
+<body>
+<header class="header">
+        <div class="header-container">
+          <!-- Menu Dropdown -->
+          <div class="menu-dropdown">
+            <a href="#" class="menu-btn">
+              <span class="menu-icon">☰</span> Menu
+            </a>
+            <ul class="dropdown-content">
+              <!--<li><a href="#">Payment Bill</a></li>-->
+              <li><a href="/admindashboard">Dashboard</a></li>
+              <li><a href="#">Complaints</a></li>
+              <li><a href="#">Employees info</a></li>
+            </ul>
+          </div>
+
+          <h2>Admin Order Approval</h2>
+
+          <!-- Profile menu and dropdown -->
+          <div class="profile-menu">
+            <div class="profile-icon" id="profile-icon">
+              <span id="profile-letter">U</span>
+            </div>
+            <input
+              type="file"
+              id="profile-upload"
+              style="display: none"
+              accept="image/*"
+            />
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="#">Edit Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+    <div class="search-container">
+        <form action="#" method="GET" style="display: flex; width: 100%; align-items: center;">
+            <input type="text" name="search" id="search" placeholder="Search by Order ID, Customer Name..." onkeydown="search_items()" oninput="search_items()">
+            <!--<button type="submit">Search</button>-->
+        </form>
+    </div>
+
+    {% for order in pending %}
+    <div class="container">
+        <!-- Order Details Section -->
+        <div class="order-details">
+            <h2>Order Details</h2>
+            <p><strong>Order ID:</strong> {{ order['_id'] }}</p>
+            <p><strong>Customer Name:</strong> {{ order['customer_name'] or order['customer_username'] }}</p>
+            <p><strong>Product:</strong> {{ order['appliance_brand']+" "+order['appliance_type'] }} </p>
+            <p><strong>Quantity:</strong> {{ order['quantity'] }}</p>
+            <p><strong>Price:</strong> ${{ order['total_amount'] }}</p>
+            <p><strong>Order Date:</strong> {{ order['rental_start_date'].date() }}</p>
+            <p><strong>Shipping Address:</strong> {{ order['customer_address'] }}</p>
+            <p><strong>Status of Delivery:</strong> {{ order['delivery_status'].capitalize() }}</p>
+        </div>
+
+        <div class="status-update">
+            <h2>Change Order Status</h2>
+            <form action="/changestatus?id={{ order['_id'] }}" method="POST">
+
+                <div class="form-group">
+                    <label for="order-status">Select Order Status:</label>
+                    <select id="order-status" name="order-status">
+                        <option value="pending" {% if order['delivery_status'] == 'pending' %}selected{% endif %} >Pending</option>
+                        <option value="approved" {% if order['delivery_status'] == 'approved' %}selected{% endif %} >Approved</option>
+                        <option value="shipped" {% if order['delivery_status'] == 'shipped' %}selected{% endif %} >Shipped</option>
+                        <option value="delivered" {% if order['delivery_status'] == 'delivered' %}selected{% endif %}>Delivered</option>
+                        <option value="cancelled" {% if order['delivery_status'] == 'cancelled' %}selected{% endif %}>Cancelled</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit">Update Status</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+</body>
+</html>
