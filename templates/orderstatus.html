@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Products</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product p {
+            margin: 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .product button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #FF5733;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product button:hover {
+            background-color: #D94E28;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #28a745;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Return Your Products</h1>
+
+        {% for item,product in orders_data %}
+        <div id="product-list">
+            <div class="product">
+                <div class="product-details">
+                    <p><strong>Order ID:</strong> {{ item['_id'] }}</p>
+                    <p><strong>Product Name:</strong> {{ product['brand']+" "+product['type'] }} </p>
+                    <p><strong>Purchase Date:</strong> {{ item['rental_start_date'].date() }}</p>
+                </div>
+                <form action="/return-product?id={{ item['_id'] }}" method="POST">
+                    <input type="hidden" name="product_id"> <!-- Pass the product ID -->
+                    <button type="submit">Return</button>
+                </form>
+            </div>
+            <!-- More products can go here in similar format -->
+        </div>
+        {% endfor %}
+        <div class="status-message" id="status-message"></div>
+    </div>
+
+    <!--<script>
+        // Example: Show success or error message after return action
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent the form from submitting
+                const productId = form.querySelector('input[name="product_id"]').value;
+                const message = `Product with ID ${productId} has been returned successfully!`;
+                document.getElementById('status-message').innerHTML = message;
+                form.querySelector('button').disabled = true; // Disable the button after submitting
+                form.querySelector('button').innerHTML = 'Returned'; // Change button text
+            });
+        });
+    </script>-->
+</body>
+</html>

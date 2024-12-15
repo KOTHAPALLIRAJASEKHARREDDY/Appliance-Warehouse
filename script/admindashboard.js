@@ -170,7 +170,7 @@ const createApplianceElement = (appliance) => {
           ", "
         )}</textarea>
         <button type="button" class="edit-btn">Edit</button>
-        <button type="button" class="delete-btn">Delete</button>
+        <button type="button" class="delete-btn" hidden="hidden">Delete</button>
         <button type="submit" class="save-btn" style="display: none;">Save</button>
       </div>
     </form>

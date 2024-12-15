@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        .password-display {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            word-wrap: break-word;
+            background-color: #f9f9f9;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+      {% if user_name %}
+      <h2>Your Username</h2>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" class="password-display" value="{{ passed }}" disabled>
+      {% else %}
+        <h2>Your Password</h2>
+
+        <label for="password">Password:</label>
+        <input type="text" id="password" class="password-display" value="{{ passed }}" disabled>
+
+
+      {% endif %}
+      <div class="back-link">
+            <p><a href="/login">Back to Login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

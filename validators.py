@@ -11,6 +11,10 @@ def validate_input():
     phone = request.form.get('phone', '').strip()
     ssn = request.form.get('ssn', '').strip()
     password = request.form.get('password', '').strip()
+    dob = request.form.get('dob', '').strip()
+    zipcode = request.form.get('zipcode', '').strip()
+    city = request.form.get('city', '').strip()
+    state = request.form.get('state', '').strip()
 
     if not firstname or not lastname:
         abort(400, "Firstname and Lastname are required.")
@@ -43,6 +47,10 @@ def validate_input():
         'email': email,
         'phone': phone,
         'ssn': ssn,
+        'dob': dob,
+        'zipcode': zipcode,
+        'city': city,
+        'state': state,
         'password': get_encripted_password(password),
     }
 
