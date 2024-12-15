@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Request - Warehouse Appliances</title>
+    <link rel="stylesheet" href="../css/maintenance.css">
+</head>
+<body>
+
+<!-- Title Bar -->
+<div class="title-bar">
+    <h1>Warehouse Appliances</h1>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <h2>Maintenance Request Form</h2>
+    <p>If you're experiencing any issues with your appliance, please fill out the form below and we'll assist you promptly.</p>
+
+    <form action="submit_request.php" method="POST">
+        <label for="appliance">Select Appliance:</label>
+        <select id="appliance" name="appliance" required>
+            <option value="">-- Select Appliance --</option>
+            <option value="Refrigerator">Refrigerator</option>
+            <option value="Washing Machine">Washing Machine</option>
+            <option value="Dishwasher">Dishwasher</option>
+            <option value="Microwave">Microwave</option>
+            <option value="Oven">Oven</option>
+            <option value="Air Conditioner">Air Conditioner</option>
+        </select>
+
+        <label for="problem">Describe the Problem:</label>
+        <select id="problem" name="problem" required>
+            <option value="">-- Select Problem --</option>
+            <option value="Not Turning On">Not Turning On</option>
+            <option value="Making Strange Noise">Making Strange Noise</option>
+            <option value="Not Cooling/Heating Properly">Not Cooling/Heating Properly</option>
+            <option value="Leaking Water">Leaking Water</option>
+            <option value="Buttons Not Working">Buttons Not Working</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="details">Additional Details (Optional):</label>
+        <textarea id="details" name="details"></textarea>
+
+        <button type="submit" class="submit-btn">Submit Request</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2024 Warehouse Appliances | All rights reserved</p>
+</div>
+
+</body>
+</html>
