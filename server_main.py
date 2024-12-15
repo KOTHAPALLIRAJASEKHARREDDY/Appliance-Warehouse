@@ -217,6 +217,51 @@ def payment():
             return "Issue Happened try again later"
 
 
+@app.route('/forgotpassword', methods=['GET','POST'])
+def forgot_password():
+    if request.method == 'GET':
+        return render_template('forgot-password.html')
+    else:
+        email = request.form.get('email')
+        password = DbManager.get_password_of_user(email)
+        if password is None:
+            return "User does not exist"
+        else:
+            session['forgot_password'] = email
+            return render_template('passwordreset.html')
+
+
+@app.route('/resetpassword', methods=['GET','POST'])
+def reset_password():
+    if request.method == 'GET':
+        return render_template('passwordreset.html')
+    else:
+        mail = session.pop('forgot_password', None)
+        new_password = request.form.get('new-password')
+        conform_password = request.form.get('confirm-password')
+        if new_password == conform_password:
+            is_changes = DbManager.update_user_password(mail, new_password)
+            if is_changes:
+                return "Password changed successfully. Login again"
+            else:
+                return "Password changed unsuccessfully. Try again later"
+        else:
+            return "passwords do not match"
+
+@app.route('/forgotusername', methods=['GET','POST'])
+def forgot_username():
+    if request.method == 'GET':
+        return render_template('forgot-username.html')
+    else:
+        firstname = request.form.get('firstname')
+        lastname = request.form.get('lastname')
+        user_name = DbManager.get_email_of_user(firstname, lastname)
+        if user_name is None:
+            return "User does not exist"
+        else:
+            return render_template('display.html',passed=user_name, user_name=True)
+
+
 @app.route('/cartpayment', methods=['GET'])
 @app.route('/cartpayment.html', methods=['GET'])
 def cart_payment():

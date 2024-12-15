@@ -1,5 +1,7 @@
 import re
+from gc import collect
 
+import bcrypt
 import pymongo
 from bson import ObjectId
 from pymongo import MongoClient
@@ -333,3 +335,32 @@ class DbManager:
     def change_return_status(id):
         rental = DbManager.get_rentals_collection()
         return rental.update_one({'_id': ObjectId(id)}, {'$set': {'return_status': 'Returned'}})
+
+    @staticmethod
+    def get_password_of_user(email):
+        user_data = DbManager.get_user_by_mail(email)
+        if user_data:
+            return user_data['password']
+        else:
+            return None
+
+    @staticmethod
+    def get_email_of_user(firstname, lastname):
+        user_collection = DbManager.get_users_collection()
+        user_data = user_collection.find_one({'firstname': firstname, 'lastname': lastname})
+        if user_data:
+            return user_data['email']
+        else:
+            return None
+
+    @staticmethod
+    def update_user_password(email, password):
+        collection = DbManager.get_users_collection()
+        is_success = collection.update_one(
+            {"email": email},
+            {"$set": {"password": bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())}}
+        )
+        if is_success:
+            return True
+        else:
+            return False
