@@ -153,36 +153,6 @@ The application will start locally and can be accessed through your browser.
 
 ---
 
-## 📸 Screenshots
-
-Add screenshots of your application here.
-
-### Home Page
-
-```markdown
-![Home Page](screenshots/home-page.png)
-```
-
-### Product Listing
-
-```markdown
-![Product Listing](screenshots/products.png)
-```
-
-### Shopping Cart
-
-```markdown
-![Shopping Cart](screenshots/cart.png)
-```
-
-### Admin Dashboard
-
-```markdown
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
-
----
-
 ## 📚 Key Learning Outcomes
 
 This project helped me gain practical experience in:
