@@ -211,7 +211,7 @@ def payment():
         if is_success:
             if data:
                 session.pop('order_info', None)
-                data["date"] = data["date"].data()
+                data["date"] = data["date"].date()
             return render_template('conformation.html', display_data=data)
         else:
             return "Issue Happened try again later"
